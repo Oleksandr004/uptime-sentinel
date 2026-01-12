@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    // "module": "ComNodeNextmonJS",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "target": "ES2022",
+    "forceConsistentCasingInFileNames": true,
+    // "moduleResolution": "node", // ← обычный Node, не NodeNext
+    "outDir": "dist",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "resolveJsonModule": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "strictPropertyInitialization": false,
+    "baseUrl": "src",
+    "paths": {
+      "prisma/*": ["prisma/*"]
+    }
+  }
+}

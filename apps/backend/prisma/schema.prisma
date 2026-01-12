@@ -1,0 +1,48 @@
+generator client {
+  provider = "prisma-client"      // новый Rust-free client
+  output   = "./generated/prisma" // обязательно указываем output
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Monitor {
+  id        String   @id @default(uuid())
+  name      String
+  url       String
+  interval  Int      @default(60) // в секундах
+  status    Status   @default(PENDING)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  checks    CheckLog[]
+  incidents Incident[]
+}
+
+model CheckLog {
+  id           String   @id @default(uuid())
+  monitorId    String
+  statusCode   Int?
+  responseTime Int      // в миллисекундах
+  status       Status
+  createdAt    DateTime @default(now())
+
+  monitor      Monitor  @relation(fields: [monitorId], references: [id], onDelete: Cascade)
+}
+
+model Incident {
+  id          String    @id @default(uuid())
+  monitorId   String
+  reason      String?
+  startedAt   DateTime  @default(now())
+  resolvedAt  DateTime?
+  
+  monitor     Monitor   @relation(fields: [monitorId], references: [id], onDelete: Cascade)
+}
+
+enum Status {
+  UP
+  DOWN
+  PENDING
+}
