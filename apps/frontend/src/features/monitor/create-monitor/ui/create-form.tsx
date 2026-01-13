@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation'
 import { Globe, Clock, Tag, Loader2 } from 'lucide-react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-
+import { toast } from 'sonner'
 import { Button } from '@/shared/ui/button'
 import { Input } from '@/shared/ui/input'
 import { Label } from '@/shared/ui/label'
@@ -53,8 +53,15 @@ export const CreateMonitorForm = () => {
 			})
 
 			if (res.ok) {
+				toast.success('Мониторинг запущен!', {
+					description: `Ресурс ${data.name} успешно добавлен в систему.`,
+				})
 				router.push('/')
 				router.refresh()
+			} else {
+				toast.error('Ошибка создания', {
+					description: 'Не удалось сохранить монитор. Попробуйте позже.',
+				})
 			}
 		} catch (err) {
 			console.error('Fetch error:', err)

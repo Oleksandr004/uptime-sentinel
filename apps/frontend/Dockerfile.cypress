@@ -1,0 +1,16 @@
+# Используем официальный образ со всеми зависимостями
+FROM cypress/included:13.6.0
+
+WORKDIR /app
+
+# Копируем конфиги и тесты
+COPY package.json pnpm-lock.yaml* ./
+RUN npm install -g pnpm && pnpm install
+
+# КРИТИЧНО: установить бинарник Cypress
+RUN npx cypress install
+
+COPY . .
+
+# Команда запуска будет переопределена в docker-compose
+ENTRYPOINT ["pnpm", "cypress", "run"]

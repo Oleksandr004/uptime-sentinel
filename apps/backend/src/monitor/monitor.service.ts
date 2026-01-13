@@ -53,23 +53,27 @@ export class MonitorService {
     });
   }
 
-  async findOne(id: string) {
-    const twentyFourHoursAgo = new Date(Date.now() - 24 * 60 * 60 * 1000);
+  async findOne(id: string, period: string) {
+    const startDate = new Date();
+    
+    if (period === '7d') startDate.setDate(startDate.getDate() - 7);
+    else if (period === '30d') startDate.setDate(startDate.getDate() - 30);
+    else startDate.setHours(startDate.getHours() - 24); // По умолчанию 24ч
   
-    return this.prisma.monitor.findUnique({
+    const monitor = await this.prisma.monitor.findUnique({
       where: { id },
       include: {
-        // Запрашиваем все проверки за сутки
         checks: {
           where: {
-            createdAt: { gte: twentyFourHoursAgo }
+            createdAt: { gte: startDate } // Фильтр: дата создания >= startDate
           },
-          orderBy: {
-            createdAt: 'asc' // Для графика нужен хронологический порядок
-          }
+          orderBy: { createdAt: 'asc' } // Для графика важен порядок от старых к новым
         }
       }
     });
+  
+    if (!monitor) throw new NotFoundException('Монитор не найден');
+    return monitor;
   }
 
   async remove(id: string) {

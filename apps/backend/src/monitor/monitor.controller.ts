@@ -84,7 +84,7 @@
 //     return res.send('\uFEFF' + csv);
 //   }
 // }
-import { Controller, Post, Get, Body, Delete, Param, Res } from '@nestjs/common'
+import { Controller, Post, Get, Body, Delete, Param, Res, Query } from '@nestjs/common'
 import { Response } from 'express'
 import { MonitorService } from './monitor.service.js'
 import { CreateMonitorDto } from './dto/create-monitor.dto.js'
@@ -97,7 +97,8 @@ import {
   ApiNotFoundResponse,
   ApiParam,
   ApiBody,
-  ApiProduces, // Добавили этот декоратор
+  ApiProduces,
+  ApiQuery, // Добавили этот декоратор
 } from '@nestjs/swagger'
 
 @ApiTags('Monitors')
@@ -121,16 +122,18 @@ export class MonitorController {
   }
 
   @Get(':id')
-  @ApiOperation({ summary: 'Получить монитор по ID' })
+  @ApiOperation({ summary: 'Получить монитор по ID с фильтрацией истории' })
   @ApiParam({
     name: 'id',
     description: 'ID монитора',
     example: 'c8f2e3a1-5d6b-4a9b-9e4a-123456789abc',
   })
+  @ApiQuery({ name: 'period', required: false, enum: ['24h', '7d', '30d'], description: 'Период истории' })
   @ApiOkResponse({ description: 'Монитор найден' })
   @ApiNotFoundResponse({ description: 'Монитор не найден' })
-  findOne(@Param('id') id: string) {
-    return this.monitorService.findOne(id)
+  findOne(@Param('id') id: string,
+  @Query('period') period: string = '24h') {
+    return this.monitorService.findOne(id, period)
   }
 
   @Delete(':id')

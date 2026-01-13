@@ -1,19 +1,64 @@
+// describe('Детали монитора', () => {
+// 	it('должен открывать страницу деталей и позволять экспорт CSV', () => {
+// 		cy.intercept('GET', '**/monitors*').as('getMonitors')
+// 		cy.visit('/')
+
+// 		cy.wait('@getMonitors', { timeout: 10000 })
+// 			.its('response.statusCode')
+// 			.should('be.oneOf', [200, 304])
+
+// 		// Находим карточку
+// 		cy.get('[data-testid="monitor-card"]', { timeout: 10000 })
+// 			.should('be.visible')
+// 			.first()
+// 			.click()
+
+// 		cy.location('pathname', { timeout: 5000 }).should('match', /^\/monitor\/.+/)
+
+// 		cy.intercept('GET', '**/monitors/*').as('getMonitorDetails')
+// 		// cy.wait('@getMonitorDetails', { timeout: 10000 })
+
+// 		cy.get('[data-testid="monitor-title"]', { timeout: 7000 }).should(
+// 			'be.visible'
+// 		)
+
+// 		cy.get('[data-testid="monitor-chart"]', { timeout: 7000 }).should(
+// 			'be.visible'
+// 		)
+
+// 		cy.get('[data-testid="export-csv"]', { timeout: 7000 })
+// 			.should('be.visible')
+// 			.and('not.be.disabled')
+// 	})
+// })
+
 describe('Детали монитора', () => {
-	it('должен открывать страницу деталей и скачивать CSV', () => {
-		cy.visit('http://localhost:3000')
+	it('должен открывать страницу деталей и позволять экспорт CSV', () => {
+		cy.intercept('GET', '**/monitors*').as('getMonitors')
+		cy.visit('/')
+		cy.wait('@getMonitors', { timeout: 15000 })
 
-		// 1. Кликаем по первой карточке монитора
-		cy.get('[class*="MonitorCard"]').first().click()
+		// Ждем, пока карточки реально отрендерятся
+		cy.get('[data-testid="monitor-card"]', { timeout: 15000 })
+			.should('exist')
+			.first()
+			.click()
 
-		// 2. Проверяем, что попали на страницу деталей (динамический ID)
-		cy.url().should('include', '/monitors/')
+		cy.location('pathname', { timeout: 5000 }).should('match', /^\/monitor\/.+/)
 
-		// 3. Проверяем наличие графика и заголовка
-		cy.get('.recharts-responsive-container').should('be.visible')
-		cy.get('h1').should('not.be.empty')
+		cy.intercept('GET', '**/monitors/*').as('getMonitorDetails')
+		cy.wait('@getMonitorDetails', { timeout: 15000 })
+			.its('response.statusCode')
+			.should('be.oneOf', [200, 304])
 
-		// 4. Тестируем экспорт CSV (проверка ссылки)
-		cy.contains('CSV').should('have.attr', 'onClick')
-		// В Cypress сложно тестить само скачивание, обычно тестят наличие ссылки или вызов окна
+		cy.get('[data-testid="monitor-title"]', { timeout: 7000 }).should(
+			'be.visible'
+		)
+		cy.get('[data-testid="monitor-chart"]', { timeout: 7000 }).should(
+			'be.visible'
+		)
+		cy.get('[data-testid="export-csv"]', { timeout: 7000 })
+			.should('be.visible')
+			.and('not.be.disabled')
 	})
 })

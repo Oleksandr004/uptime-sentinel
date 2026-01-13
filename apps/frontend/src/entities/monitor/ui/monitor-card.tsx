@@ -87,6 +87,7 @@ export const MonitorCard = ({
 	return (
 		// Добавлены dark:bg-slate-900 dark:border-slate-800
 		<motion.div
+			data-testid='monitor-card'
 			whileHover={{
 				y: -5,
 				transition: { duration: 0.2 },
@@ -128,88 +129,90 @@ export const MonitorCard = ({
 				</AlertDialog>
 			</div>
 
-			<Link href={`/monitor/${id}`} className='p-5 flex-1'>
-				<div className='flex items-start gap-4'>
-					<div
-						className={`shrink-0 p-3 rounded-lg ${
-							isUp
-								? 'bg-green-50 dark:bg-green-950/30 text-green-600 dark:text-green-400'
-								: 'bg-red-50 dark:bg-red-950/30 text-red-600 dark:text-red-400'
-						}`}
-					>
-						<Globe size={24} />
-					</div>
-
-					<div className='min-w-0 flex-1 pr-6'>
-						<div className='flex items-center gap-1'>
-							<h3
-								className='font-bold text-slate-800 dark:text-slate-100 truncate'
-								title={name}
-							>
-								{name}
-							</h3>
-							<ChevronRight
-								size={14}
-								className='text-slate-300 dark:text-slate-600 opacity-0 group-hover:opacity-100 transition-all'
-							/>
-						</div>
-						<p
-							className='text-sm text-slate-500 dark:text-slate-400 truncate mt-0.5'
-							title={url}
+			<div data-testid='monitor-card' className='p-5 flex-1 flex flex-col'>
+				<Link href={`/monitor/${id}`}>
+					<div className='flex items-start gap-4'>
+						<div
+							className={`shrink-0 p-3 rounded-lg ${
+								isUp
+									? 'bg-green-50 dark:bg-green-950/30 text-green-600 dark:text-green-400'
+									: 'bg-red-50 dark:bg-red-950/30 text-red-600 dark:text-red-400'
+							}`}
 						>
-							{url}
-						</p>
-					</div>
-				</div>
+							<Globe size={24} />
+						</div>
 
-				<div className='mt-6 flex items-end justify-between gap-4'>
-					<div className='shrink-0'>
-						<div className='flex items-center gap-2 mb-1'>
-							<div
-								className={`w-2 h-2 rounded-full animate-pulse ${
-									isUp ? 'bg-green-500' : 'bg-red-500'
-								}`}
-							/>
-							<p className='text-[10px] text-slate-400 dark:text-slate-500 uppercase font-bold tracking-tight'>
-								Response Time
+						<div className='min-w-0 flex-1 pr-6'>
+							<div className='flex items-center gap-1'>
+								<h3
+									className='font-bold text-slate-800 dark:text-slate-100 truncate'
+									title={name}
+								>
+									{name}
+								</h3>
+								<ChevronRight
+									size={14}
+									className='text-slate-300 dark:text-slate-600 opacity-0 group-hover:opacity-100 transition-all'
+								/>
+							</div>
+							<p
+								className='text-sm text-slate-500 dark:text-slate-400 truncate mt-0.5'
+								title={url}
+							>
+								{url}
 							</p>
 						</div>
-						<p className='text-2xl font-black text-slate-700 dark:text-slate-200'>
-							{currentLatency}
-							<span className='text-xs font-medium ml-1 text-slate-400 dark:text-slate-500'>
-								ms
-							</span>
-						</p>
 					</div>
 
-					<div className='h-12 flex-1 max-w-[120px]'>
-						<ResponsiveContainer width='100%' height='100%'>
-							<LineChart data={currentHistory}>
-								<Line
-									type='monotone'
-									dataKey='ms'
-									// Цвета линий чуть ярче для темной темы
-									stroke={isUp ? '#10b981' : '#f87171'}
-									strokeWidth={2}
-									dot={false}
-									isAnimationActive={false}
+					<div className='mt-6 flex items-end justify-between gap-4'>
+						<div className='shrink-0'>
+							<div className='flex items-center gap-2 mb-1'>
+								<div
+									className={`w-2 h-2 rounded-full animate-pulse ${
+										isUp ? 'bg-green-500' : 'bg-red-500'
+									}`}
 								/>
-							</LineChart>
-						</ResponsiveContainer>
-					</div>
-				</div>
+								<p className='text-[10px] text-slate-400 dark:text-slate-500 uppercase font-bold tracking-tight'>
+									Response Time
+								</p>
+							</div>
+							<p className='text-2xl font-black text-slate-700 dark:text-slate-200'>
+								{currentLatency}
+								<span className='text-xs font-medium ml-1 text-slate-400 dark:text-slate-500'>
+									ms
+								</span>
+							</p>
+						</div>
 
-				<div
-					className={`mt-4 pt-4 border-t border-slate-50 dark:border-slate-800/50 flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest ${
-						isUp
-							? 'text-green-600 dark:text-green-400'
-							: 'text-red-600 dark:text-red-400'
-					}`}
-				>
-					{isUp ? <CheckCircle2 size={14} /> : <AlertCircle size={14} />}
-					{currentStatus}
-				</div>
-			</Link>
+						<div className='h-12 flex-1 max-w-[120px]'>
+							<ResponsiveContainer width='100%' height='100%'>
+								<LineChart data={currentHistory}>
+									<Line
+										type='monotone'
+										dataKey='ms'
+										// Цвета линий чуть ярче для темной темы
+										stroke={isUp ? '#10b981' : '#f87171'}
+										strokeWidth={2}
+										dot={false}
+										isAnimationActive={false}
+									/>
+								</LineChart>
+							</ResponsiveContainer>
+						</div>
+					</div>
+
+					<div
+						className={`mt-4 pt-4 border-t border-slate-50 dark:border-slate-800/50 flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest ${
+							isUp
+								? 'text-green-600 dark:text-green-400'
+								: 'text-red-600 dark:text-red-400'
+						}`}
+					>
+						{isUp ? <CheckCircle2 size={14} /> : <AlertCircle size={14} />}
+						{currentStatus}
+					</div>
+				</Link>
+			</div>
 		</motion.div>
 	)
 }
