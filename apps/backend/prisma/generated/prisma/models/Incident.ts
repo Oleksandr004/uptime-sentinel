@@ -359,10 +359,6 @@ export type IncidentUncheckedUpdateManyWithoutMonitorNestedInput = {
   deleteMany?: Prisma.IncidentScalarWhereInput | Prisma.IncidentScalarWhereInput[]
 }
 
-export type NullableStringFieldUpdateOperationsInput = {
-  set?: string | null
-}
-
 export type NullableDateTimeFieldUpdateOperationsInput = {
   set?: Date | string | null
 }

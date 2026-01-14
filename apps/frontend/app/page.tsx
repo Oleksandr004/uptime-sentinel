@@ -4,9 +4,12 @@ import { MonitorList } from '@/widgets/monitor-list/ui/monitor-list'
 import { StatsOverview } from '@/widgets/stats-overview/ui/stats-overview'
 import { Button } from '@/shared/ui/button'
 import { ThemeToggle } from '@/shared/ui/theme-toggle'
-import { Plus, Search, Filter, X } from 'lucide-react'
+import { Plus, Search, Filter, X, LogOut } from 'lucide-react'
 import { motion } from 'framer-motion'
+import { api } from '@/shared/api/base'
 import Link from 'next/link'
+
+import { useAuth } from './providers/AuthProvider'
 
 interface Monitor {
 	id: string
@@ -25,18 +28,19 @@ interface Monitor {
 }
 
 export default function DashboardPage() {
+	const { user, logout, isLoading } = useAuth()
 	const [monitors, setMonitors] = useState<Monitor[]>([])
-	const [isLoading, setIsLoading] = useState(true)
+
 	const [searchQuery, setSearchQuery] = useState('')
 	const [filterStatus, setFilterStatus] = useState<'ALL' | 'UP' | 'DOWN'>('ALL')
 
 	useEffect(() => {
-		fetch(
-			`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/monitors`
-		)
-			.then((res) => res.json())
-			.then((data) => {
+		const fetchMonitors = async () => {
+			try {
+				const res = await api.get('/monitors')
 				let monitorsArray: Monitor[] = []
+
+				const data = res.data
 
 				if (Array.isArray(data)) {
 					monitorsArray = data
@@ -49,7 +53,7 @@ export default function DashboardPage() {
 					...m,
 					history: m.checks
 						? m.checks.slice(-15).map((c) => ({ ms: c.responseTime }))
-						: [], // если checks нет, ставим пустой массив
+						: [],
 					latency:
 						m.checks && m.checks.length
 							? Math.round(
@@ -60,12 +64,13 @@ export default function DashboardPage() {
 				}))
 
 				setMonitors(monitorsArray)
-			})
-			.catch((err) => {
+			} catch (err: any) {
 				console.error('Ошибка загрузки:', err)
 				setMonitors([])
-			})
-			.finally(() => setIsLoading(false))
+			}
+		}
+
+		fetchMonitors()
 	}, [])
 
 	// Фильтрация безопасно: проверяем, что массив
@@ -79,6 +84,32 @@ export default function DashboardPage() {
 				return matchesSearch && matchesStatus
 		  })
 		: []
+
+	if (!user) {
+		return (
+			<div className='flex flex-col items-center justify-center min-h-screen bg-gray-50 p-4 text-black'>
+				<h1 className='text-4xl font-extrabold mb-4'>Uptime Monitor</h1>
+				<p className='text-gray-600 mb-8 text-center max-w-md'>
+					Следите за доступностью ваших сервисов в реальном времени. Получайте
+					уведомления в Telegram, когда что-то идет не так.
+				</p>
+				<div className='flex gap-4'>
+					<Link
+						href='/login'
+						className='bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700'
+					>
+						Войти
+					</Link>
+					<Link
+						href='/register'
+						className='border border-blue-600 text-blue-600 px-6 py-2 rounded-lg hover:bg-blue-50'
+					>
+						Регистрация
+					</Link>
+				</div>
+			</div>
+		)
+	}
 
 	return (
 		<main className='min-h-screen bg-slate-50 dark:bg-slate-950 p-6 md:p-12 transition-colors duration-300'>
@@ -98,6 +129,17 @@ export default function DashboardPage() {
 
 					<div className='flex items-center gap-3 w-full md:w-auto'>
 						<ThemeToggle />
+						<Button
+							onClick={logout}
+							variant='outline'
+							className='rounded-xl px-4 py-6 border-slate-200 dark:border-slate-800 hover:bg-red-50 hover:text-red-600 dark:hover:bg-red-950/30 dark:hover:text-red-400 transition-all group'
+						>
+							<LogOut
+								size={20}
+								className='group-hover:translate-x-0.5 transition-transform'
+							/>
+							<span className='hidden md:inline ml-2 font-bold'>Выйти</span>
+						</Button>
 						<Link href='/add' className='flex-1 md:flex-none'>
 							<Button className='w-full bg-blue-600 hover:bg-blue-700 text-white rounded-xl px-6 py-6 shadow-lg shadow-blue-100 dark:shadow-none flex gap-2 transition-all active:scale-95 border-none'>
 								<Plus size={20} strokeWidth={3} />

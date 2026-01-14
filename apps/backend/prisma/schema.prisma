@@ -7,28 +7,57 @@ datasource db {
   provider = "postgresql"
 }
 
+model User {
+  id            String    @id @default(uuid())
+  email         String    @unique
+  password      String?   // Опционально (будет null, если вход ТОЛЬКО через Google)
+  name          String?
+  image         String?   // Для аватарки из Google
+  
+  // Поля для OAuth (Google)
+  provider      String    @default("credentials") // "credentials" или "google"
+  externalId    String?   // ID пользователя в системе Google
+  
+  monitors      Monitor[] // Связь: один пользователь — много мониторов
+  
+  createdat     DateTime  @default(now())
+  updatedat     DateTime  @updatedAt
+  @@map("user") 
+}
+
+
 model Monitor {
   id        String   @id @default(uuid())
   name      String
   url       String
-  interval  Int      @default(60) // в секундах
+  interval  Int      @default(60)
   status    Status   @default(PENDING)
+  
+  // Связь с User
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   checks    CheckLog[]
   incidents Incident[]
+
+  // Индекс для быстрого поиска мониторов конкретного юзера
+  @@index([userId])
+  // @@map("Monitor")
 }
 
 model CheckLog {
   id           String   @id @default(uuid())
   monitorId    String
   statusCode   Int?
-  responseTime Int      // в миллисекундах
+  responseTime Int
   status       Status
   createdAt    DateTime @default(now())
 
   monitor      Monitor  @relation(fields: [monitorId], references: [id], onDelete: Cascade)
+  // @@map("CheckLog")
 }
 
 model Incident {
@@ -39,6 +68,7 @@ model Incident {
   resolvedAt  DateTime?
   
   monitor     Monitor   @relation(fields: [monitorId], references: [id], onDelete: Cascade)
+//  @@map("Incident")
 }
 
 enum Status {

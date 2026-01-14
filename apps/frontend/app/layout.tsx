@@ -1,9 +1,9 @@
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import './globals.css'
-import { Providers } from './providers'
+import { ProviderForTheme } from './providers/ThemeProvider'
 import { Toaster } from 'sonner'
-
+import { AuthProvider } from './providers/AuthProvider'
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL
 
 const geistSans = Geist({
@@ -73,10 +73,12 @@ export default function RootLayout({
 			<body
 				className={`${geistSans.variable} ${geistMono.variable} antialiased`}
 			>
-				<Providers>
-					{children}
-					<Toaster position='top-right' richColors />
-				</Providers>
+				<AuthProvider>
+					<ProviderForTheme>
+						{children}
+						<Toaster position='top-right' richColors />
+					</ProviderForTheme>
+				</AuthProvider>
 			</body>
 		</html>
 	)

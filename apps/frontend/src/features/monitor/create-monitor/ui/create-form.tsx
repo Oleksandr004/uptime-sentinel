@@ -8,6 +8,7 @@ import { toast } from 'sonner'
 import { Button } from '@/shared/ui/button'
 import { Input } from '@/shared/ui/input'
 import { Label } from '@/shared/ui/label'
+import { api } from '@/shared/api/base'
 import {
 	Card,
 	CardContent,
@@ -46,13 +47,9 @@ export const CreateMonitorForm = () => {
 
 	const onSubmit = async (data: MonitorFormValues) => {
 		try {
-			const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/monitors`, {
-				method: 'POST',
-				body: JSON.stringify(data),
-				headers: { 'Content-Type': 'application/json' },
-			})
+			const res = await api.post('/monitors', data) // axios сам сериализует JSON
 
-			if (res.ok) {
+			if (res.status >= 200 && res.status < 300) {
 				toast.success('Мониторинг запущен!', {
 					description: `Ресурс ${data.name} успешно добавлен в систему.`,
 				})
@@ -63,8 +60,19 @@ export const CreateMonitorForm = () => {
 					description: 'Не удалось сохранить монитор. Попробуйте позже.',
 				})
 			}
-		} catch (err) {
-			console.error('Fetch error:', err)
+		} catch (err: any) {
+			console.error('Axios error:', err)
+
+			// Можно показать более подробное сообщение, если есть ответ сервера
+			if (err.response?.data?.message) {
+				toast.error('Ошибка создания', {
+					description: err.response.data.message,
+				})
+			} else {
+				toast.error('Ошибка создания', {
+					description: 'Не удалось сохранить монитор. Попробуйте позже.',
+				})
+			}
 		}
 	}
 

@@ -20,7 +20,7 @@ const config: runtime.GetPrismaClientConfig = {
   "clientVersion": "7.2.0",
   "engineVersion": "0c8ef2ce45c83248ab3df073180d5eda9e8be7a3",
   "activeProvider": "postgresql",
-  "inlineSchema": "generator client {\n  provider = \"prisma-client\" // новый Rust-free client\n  output   = \"./generated/prisma\" // обязательно указываем output\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n\nmodel Monitor {\n  id        String   @id @default(uuid())\n  name      String\n  url       String\n  interval  Int      @default(60) // в секундах\n  status    Status   @default(PENDING)\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  checks    CheckLog[]\n  incidents Incident[]\n}\n\nmodel CheckLog {\n  id           String   @id @default(uuid())\n  monitorId    String\n  statusCode   Int?\n  responseTime Int // в миллисекундах\n  status       Status\n  createdAt    DateTime @default(now())\n\n  monitor Monitor @relation(fields: [monitorId], references: [id], onDelete: Cascade)\n}\n\nmodel Incident {\n  id         String    @id @default(uuid())\n  monitorId  String\n  reason     String?\n  startedAt  DateTime  @default(now())\n  resolvedAt DateTime?\n\n  monitor Monitor @relation(fields: [monitorId], references: [id], onDelete: Cascade)\n}\n\nenum Status {\n  UP\n  DOWN\n  PENDING\n}\n",
+  "inlineSchema": "generator client {\n  provider = \"prisma-client\" // новый Rust-free client\n  output   = \"./generated/prisma\" // обязательно указываем output\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n\nmodel User {\n  id       String  @id @default(uuid())\n  email    String  @unique\n  password String? // Опционально (будет null, если вход ТОЛЬКО через Google)\n  name     String?\n  image    String? // Для аватарки из Google\n\n  // Поля для OAuth (Google)\n  provider   String  @default(\"credentials\") // \"credentials\" или \"google\"\n  externalId String? // ID пользователя в системе Google\n\n  monitors Monitor[] // Связь: один пользователь — много мониторов\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  @@map(\"user\")\n}\n\nmodel Monitor {\n  id       String @id @default(uuid())\n  name     String\n  url      String\n  interval Int    @default(60)\n  status   Status @default(PENDING)\n\n  // Связь с User\n  userId String\n  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  checks    CheckLog[]\n  incidents Incident[]\n  // @@map(\"Monitor\")\n\n  // Индекс для быстрого поиска мониторов конкретного юзера\n  @@index([userId])\n}\n\nmodel CheckLog {\n  id           String   @id @default(uuid())\n  monitorId    String\n  statusCode   Int?\n  responseTime Int\n  status       Status\n  createdAt    DateTime @default(now())\n\n  monitor Monitor @relation(fields: [monitorId], references: [id], onDelete: Cascade)\n  // @@map(\"CheckLog\")\n}\n\nmodel Incident {\n  id         String    @id @default(uuid())\n  monitorId  String\n  reason     String?\n  startedAt  DateTime  @default(now())\n  resolvedAt DateTime?\n\n  monitor Monitor @relation(fields: [monitorId], references: [id], onDelete: Cascade)\n  //  @@map(\"Incident\")\n}\n\nenum Status {\n  UP\n  DOWN\n  PENDING\n}\n",
   "runtimeDataModel": {
     "models": {},
     "enums": {},
@@ -28,7 +28,7 @@ const config: runtime.GetPrismaClientConfig = {
   }
 }
 
-config.runtimeDataModel = JSON.parse("{\"models\":{\"Monitor\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"url\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"interval\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"status\",\"kind\":\"enum\",\"type\":\"Status\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"checks\",\"kind\":\"object\",\"type\":\"CheckLog\",\"relationName\":\"CheckLogToMonitor\"},{\"name\":\"incidents\",\"kind\":\"object\",\"type\":\"Incident\",\"relationName\":\"IncidentToMonitor\"}],\"dbName\":null},\"CheckLog\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"monitorId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"statusCode\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"responseTime\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"status\",\"kind\":\"enum\",\"type\":\"Status\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"monitor\",\"kind\":\"object\",\"type\":\"Monitor\",\"relationName\":\"CheckLogToMonitor\"}],\"dbName\":null},\"Incident\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"monitorId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"reason\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"startedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"resolvedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"monitor\",\"kind\":\"object\",\"type\":\"Monitor\",\"relationName\":\"IncidentToMonitor\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
+config.runtimeDataModel = JSON.parse("{\"models\":{\"User\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"password\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"image\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"provider\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"externalId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"monitors\",\"kind\":\"object\",\"type\":\"Monitor\",\"relationName\":\"MonitorToUser\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":\"user\"},\"Monitor\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"url\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"interval\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"status\",\"kind\":\"enum\",\"type\":\"Status\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"MonitorToUser\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"checks\",\"kind\":\"object\",\"type\":\"CheckLog\",\"relationName\":\"CheckLogToMonitor\"},{\"name\":\"incidents\",\"kind\":\"object\",\"type\":\"Incident\",\"relationName\":\"IncidentToMonitor\"}],\"dbName\":null},\"CheckLog\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"monitorId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"statusCode\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"responseTime\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"status\",\"kind\":\"enum\",\"type\":\"Status\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"monitor\",\"kind\":\"object\",\"type\":\"Monitor\",\"relationName\":\"CheckLogToMonitor\"}],\"dbName\":null},\"Incident\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"monitorId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"reason\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"startedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"resolvedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"monitor\",\"kind\":\"object\",\"type\":\"Monitor\",\"relationName\":\"IncidentToMonitor\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
 
 async function decodeBase64AsWasm(wasmBase64: string): Promise<WebAssembly.Module> {
   const { Buffer } = await import('node:buffer')
@@ -58,8 +58,8 @@ export interface PrismaClientConstructor {
    * @example
    * ```
    * const prisma = new PrismaClient()
-   * // Fetch zero or more Monitors
-   * const monitors = await prisma.monitor.findMany()
+   * // Fetch zero or more Users
+   * const users = await prisma.user.findMany()
    * ```
    * 
    * Read more in our [docs](https://pris.ly/d/client).
@@ -80,8 +80,8 @@ export interface PrismaClientConstructor {
  * @example
  * ```
  * const prisma = new PrismaClient()
- * // Fetch zero or more Monitors
- * const monitors = await prisma.monitor.findMany()
+ * // Fetch zero or more Users
+ * const users = await prisma.user.findMany()
  * ```
  * 
  * Read more in our [docs](https://pris.ly/d/client).
@@ -175,6 +175,16 @@ export interface PrismaClient<
   }>>
 
       /**
+   * `prisma.user`: Exposes CRUD operations for the **User** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Users
+    * const users = await prisma.user.findMany()
+    * ```
+    */
+  get user(): Prisma.UserDelegate<ExtArgs, { omit: OmitOpts }>;
+
+  /**
    * `prisma.monitor`: Exposes CRUD operations for the **Monitor** model.
     * Example usage:
     * ```ts
