@@ -1,75 +1,3 @@
-// import { Processor, WorkerHost } from '@nestjs/bullmq';
-// import { Job } from 'bullmq';
-// import { PrismaService } from '../../prisma/prisma.service.js';
-// import { EventsGateway } from '../events/events.gateway.js';
-// import axios from 'axios';
-
-// @Processor('uptime-checks')
-// export class UptimeProcessor extends WorkerHost {
-//   constructor(
-//     private prisma: PrismaService,
-//     private eventsGateway: EventsGateway,
-//   ) {
-//     super();
-//   }
-
-//   async process(job: Job<{ monitorId: string; url: string }>): Promise<any> {
-//     const { monitorId, url } = job.data;
-//     const startTime = Date.now();
-
-//     try {
-//       // 1. Делаем реальный запрос к сайту
-//       const response = await axios.get(url, { timeout: 10000 }); // таймаут 10 сек
-//       const responseTime = Date.now() - startTime;
-
-//       // 2. Сохраняем лог успешной проверки
-//       await this.prisma.checkLog.create({
-//         data: {
-//           monitorId,
-//           status: 'UP',
-//           statusCode: response.status,
-//           responseTime,
-//         },
-//       });
-
-//       // 3. Обновляем статус самого монитора
-//       await this.prisma.monitor.update({
-//         where: { id: monitorId },
-//         data: { status: 'UP' },
-//       });
-//       this.eventsGateway.sendMonitorUpdate(monitorId, {
-//         status: 'UP',
-//         latency: responseTime,
-//       });
-
-//       console.log(`✅ ${url} is UP (${responseTime}ms)`);
-//     } catch (error: any) {
-//       const responseTime = Date.now() - startTime;
-
-//       // 4. Если сайт лежит (ошибка 4xx, 5xx или таймаут)
-//       await this.prisma.checkLog.create({
-//         data: {
-//           monitorId,
-//           status: 'DOWN',
-//           statusCode: error.response?.status || 0,
-//           responseTime,
-//         },
-//       });
-
-//       await this.prisma.monitor.update({
-//         where: { id: monitorId },
-//         data: { status: 'DOWN' },
-//       });
-//       this.eventsGateway.sendMonitorUpdate(monitorId, {
-//         status: 'DOWN',
-//         latency: responseTime,
-//       });
-//       console.log(`❌ ${url} is DOWN`);
-
-//       // Сюда можно добавить логику создания Incident или отправку в Telegram
-//     }
-//   }
-// }
 import { Processor, WorkerHost } from '@nestjs/bullmq';
 import { Job } from 'bullmq';
 import { PrismaService } from '../../prisma/prisma.service.js';
@@ -99,7 +27,10 @@ export class UptimeProcessor extends WorkerHost {
     if (!monitor) return;
 
     try {
-      const response = await axios.get(url, { timeout: 10000 });
+      const response = await axios.get(url, {
+        timeout: 1000,
+        headers: { 'User-Agent': 'SentinelMonitor/1.0' },
+      });
       const responseTime = Date.now() - startTime;
 
       // 2. Логируем успех

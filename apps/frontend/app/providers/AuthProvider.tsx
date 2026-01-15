@@ -8,6 +8,7 @@ import {
 	ReactNode,
 } from 'react'
 import { api } from '@/shared/api/base'
+import { fetchWithRefresh } from '@/shared/api/fetch-with-refresh'
 
 // 1. Описываем, какие данные будут доступны в приложении
 interface AuthContextType {
@@ -27,8 +28,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 	useEffect(() => {
 		const initAuth = async () => {
 			try {
-				// Браузер сам отправит HttpOnly куку
-				const { data } = await api.get('/auth/me')
+				// fetchWithRefresh автоматически обновит accessToken, если нужно
+				const { data } = await fetchWithRefresh('/auth/me')
 				setUser(data)
 			} catch (e) {
 				setUser(null)

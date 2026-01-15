@@ -10,6 +10,7 @@ import { api } from '@/shared/api/base'
 import Link from 'next/link'
 
 import { useAuth } from './providers/AuthProvider'
+import { fetchWithRefresh } from '@/shared/api/fetch-with-refresh'
 
 interface Monitor {
 	id: string
@@ -28,16 +29,18 @@ interface Monitor {
 }
 
 export default function DashboardPage() {
-	const { user, logout, isLoading } = useAuth()
+	const { user, logout, isLoading: isAuthLoading } = useAuth()
 	const [monitors, setMonitors] = useState<Monitor[]>([])
-
+	const [isDataLoading, setIsDataLoading] = useState(true)
 	const [searchQuery, setSearchQuery] = useState('')
 	const [filterStatus, setFilterStatus] = useState<'ALL' | 'UP' | 'DOWN'>('ALL')
 
 	useEffect(() => {
 		const fetchMonitors = async () => {
+			if (!user) return
+			setIsDataLoading(true)
 			try {
-				const res = await api.get('/monitors')
+				const res = await fetchWithRefresh('/monitors')
 				let monitorsArray: Monitor[] = []
 
 				const data = res.data
@@ -71,7 +74,7 @@ export default function DashboardPage() {
 		}
 
 		fetchMonitors()
-	}, [])
+	}, [user])
 
 	// Фильтрация безопасно: проверяем, что массив
 	const filteredMonitors = Array.isArray(monitors)
@@ -84,6 +87,13 @@ export default function DashboardPage() {
 				return matchesSearch && matchesStatus
 		  })
 		: []
+	if (isAuthLoading) {
+		return (
+			<div className='min-h-screen flex items-center justify-center bg-slate-50 dark:bg-slate-950 text-slate-500 font-medium'>
+				Загрузка...
+			</div>
+		)
+	}
 
 	if (!user) {
 		return (
@@ -211,7 +221,7 @@ export default function DashboardPage() {
 
 				{/* Список мониторов */}
 				<div className='min-h-[400px]'>
-					{isLoading ? (
+					{isAuthLoading ? (
 						<div className='grid grid-cols-1 md:grid-cols-3 gap-6 animate-pulse'>
 							{[1, 2, 3].map((i) => (
 								<div

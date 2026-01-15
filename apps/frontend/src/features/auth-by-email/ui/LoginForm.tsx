@@ -110,6 +110,7 @@ import { api } from '@/shared/api/base'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { loginSchema, LoginSchema } from '../model/login-schema'
+import { toast } from 'sonner'
 
 export const LoginForm = () => {
 	const [serverError, setServerError] = useState('')
@@ -133,10 +134,11 @@ export const LoginForm = () => {
 		try {
 			const { data } = await api.post('/auth/login', values)
 			setUser(data.user)
+			toast.success(`Добро пожаловать, ${data.user.name}!`) // Успех всё же пишем вручную
 			router.push('/')
 			router.refresh()
 		} catch (err: any) {
-			setServerError(err.response?.data?.message || 'Неверный email или пароль')
+			// setServerError(err.response?.data?.message || 'Неверный email или пароль')
 		} finally {
 			setLoading(false)
 		}

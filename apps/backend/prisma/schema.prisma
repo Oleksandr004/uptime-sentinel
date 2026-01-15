@@ -1,6 +1,6 @@
 generator client {
-  provider = "prisma-client"      // новый Rust-free client
-  output   = "./generated/prisma" // обязательно указываем output
+  provider = "prisma-client"
+  output   = "./generated/prisma"
 }
 
 datasource db {
@@ -8,67 +8,50 @@ datasource db {
 }
 
 model User {
-  id            String    @id @default(uuid())
-  email         String    @unique
-  password      String?   // Опционально (будет null, если вход ТОЛЬКО через Google)
-  name          String?
-  image         String?   // Для аватарки из Google
-  
-  // Поля для OAuth (Google)
-  provider      String    @default("credentials") // "credentials" или "google"
-  externalId    String?   // ID пользователя в системе Google
-  
-  monitors      Monitor[] // Связь: один пользователь — много мониторов
-  
-  createdat     DateTime  @default(now())
-  updatedat     DateTime  @updatedAt
-  @@map("user") 
+  id                        String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  email                     String    @unique @db.VarChar(255)
+  password                  String?   @db.VarChar(255)
+  name                      String?   @db.VarChar(255)
+  image                     String?   @db.VarChar(255)
+  provider                  String    @default("credentials") @db.VarChar(50)
+  externalId                String?   @db.VarChar(255)
+  createdAt                 DateTime? @default(now()) @db.Timestamptz(6)
+  updatedAt                 DateTime? @default(now()) @db.Timestamptz(6)
+  currentHashedRefreshToken String?
+  Monitor                   Monitor[]
+
+  @@map("user")
 }
 
-
 model Monitor {
-  id        String   @id @default(uuid())
-  name      String
-  url       String
-  interval  Int      @default(60)
-  status    Status   @default(PENDING)
-  
-  // Связь с User
-  userId    String
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  checks    CheckLog[]
-  incidents Incident[]
-
-  // Индекс для быстрого поиска мониторов конкретного юзера
-  @@index([userId])
-  // @@map("Monitor")
+  id        String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name      String     @db.VarChar(255)
+  url       String     @db.VarChar(2048)
+  interval  Int        @default(60)
+  status    Status     @default(PENDING)
+  userid    String     @db.Uuid
+  createdat DateTime?  @default(now()) @db.Timestamptz(6)
+  updatedat DateTime?  @default(now()) @db.Timestamptz(6)
+  user      User       @relation(fields: [userid], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_monitor_user")
+  checks    CheckLog[] @relation("MonitorChecks")
 }
 
 model CheckLog {
-  id           String   @id @default(uuid())
-  monitorId    String
-  statusCode   Int?
-  responseTime Int
-  status       Status
-  createdAt    DateTime @default(now())
-
-  monitor      Monitor  @relation(fields: [monitorId], references: [id], onDelete: Cascade)
-  // @@map("CheckLog")
+  id           String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  monitorid    String    @db.Uuid
+  statuscode   Int?
+  responsetime Int
+  status       Status    @default(PENDING)
+  createdat    DateTime? @default(now()) @db.Timestamptz(6)
+  monitor      Monitor   @relation("MonitorChecks", fields: [monitorid], references: [id])
 }
 
 model Incident {
-  id          String    @id @default(uuid())
-  monitorId   String
-  reason      String?
-  startedAt   DateTime  @default(now())
-  resolvedAt  DateTime?
-  
-  monitor     Monitor   @relation(fields: [monitorId], references: [id], onDelete: Cascade)
-//  @@map("Incident")
+  id         String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  monitorid  String    @db.Uuid
+  reason     String?
+  startedat  DateTime? @default(now()) @db.Timestamptz(6)
+  resolvedat DateTime? @db.Timestamptz(6)
 }
 
 enum Status {

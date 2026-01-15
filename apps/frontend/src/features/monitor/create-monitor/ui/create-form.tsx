@@ -23,6 +23,7 @@ import {
 	monitorSchema,
 	MonitorFormValues,
 } from '@/entities/monitor/model/monitor.schema'
+import { fetchWithRefresh } from '@/shared/api/fetch-with-refresh'
 
 export const CreateMonitorForm = () => {
 	const router = useRouter()
@@ -47,7 +48,10 @@ export const CreateMonitorForm = () => {
 
 	const onSubmit = async (data: MonitorFormValues) => {
 		try {
-			const res = await api.post('/monitors', data) // axios сам сериализует JSON
+			const res = await fetchWithRefresh('/monitors', {
+				method: 'POST',
+				data, // axios сам сериализует JSON
+			}) // axios сам сериализует JSON
 
 			if (res.status >= 200 && res.status < 300) {
 				toast.success('Мониторинг запущен!', {

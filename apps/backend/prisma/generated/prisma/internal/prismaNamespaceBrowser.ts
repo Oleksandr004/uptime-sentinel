@@ -82,7 +82,8 @@ export const UserScalarFieldEnum = {
   provider: 'provider',
   externalId: 'externalId',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  currentHashedRefreshToken: 'currentHashedRefreshToken'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -94,9 +95,9 @@ export const MonitorScalarFieldEnum = {
   url: 'url',
   interval: 'interval',
   status: 'status',
-  userId: 'userId',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  userid: 'userid',
+  createdat: 'createdat',
+  updatedat: 'updatedat'
 } as const
 
 export type MonitorScalarFieldEnum = (typeof MonitorScalarFieldEnum)[keyof typeof MonitorScalarFieldEnum]
@@ -104,11 +105,11 @@ export type MonitorScalarFieldEnum = (typeof MonitorScalarFieldEnum)[keyof typeo
 
 export const CheckLogScalarFieldEnum = {
   id: 'id',
-  monitorId: 'monitorId',
-  statusCode: 'statusCode',
-  responseTime: 'responseTime',
+  monitorid: 'monitorid',
+  statuscode: 'statuscode',
+  responsetime: 'responsetime',
   status: 'status',
-  createdAt: 'createdAt'
+  createdat: 'createdat'
 } as const
 
 export type CheckLogScalarFieldEnum = (typeof CheckLogScalarFieldEnum)[keyof typeof CheckLogScalarFieldEnum]
@@ -116,10 +117,10 @@ export type CheckLogScalarFieldEnum = (typeof CheckLogScalarFieldEnum)[keyof typ
 
 export const IncidentScalarFieldEnum = {
   id: 'id',
-  monitorId: 'monitorId',
+  monitorid: 'monitorid',
   reason: 'reason',
-  startedAt: 'startedAt',
-  resolvedAt: 'resolvedAt'
+  startedat: 'startedat',
+  resolvedat: 'resolvedat'
 } as const
 
 export type IncidentScalarFieldEnum = (typeof IncidentScalarFieldEnum)[keyof typeof IncidentScalarFieldEnum]

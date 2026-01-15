@@ -25,6 +25,9 @@ import {
 import { Button } from '@/shared/ui/button'
 import { exportToPDF } from '@/entities/monitor/lib/export-to-pdf'
 import { cn } from '@/shared/lib/utils'
+import { api } from '@/shared/api/base'
+import { toast } from 'sonner'
+import { fetchWithRefresh } from '@/shared/api/fetch-with-refresh'
 
 // типы
 type Period = '24h' | '7d' | '30d'
@@ -42,7 +45,7 @@ export default function MonitorDetailsClient({ id }: { id: string }) {
 	const [isSwitching, setIsSwitching] = useState(false)
 
 	// 	// --- Расчёт статистики ---
-	const checks = data.checks || []
+	const checks = data?.checks || []
 	const totalChecks = checks.length
 	const upChecks = checks.filter((c: any) => c.status === 'UP').length
 	const uptimePercentage =
@@ -82,11 +85,10 @@ export default function MonitorDetailsClient({ id }: { id: string }) {
 			isInitial ? setIsLoading(true) : setIsSwitching(true)
 
 			try {
-				const res = await fetch(
-					`${BASE_URL}/monitors/${id}?period=${selectedPeriod}`
-				)
-				if (!res.ok) throw new Error('Fetch error')
-				setData(await res.json())
+				const res = await api.get(`/monitors/${id}`, {
+					params: { period: selectedPeriod },
+				})
+				setData(res.data)
 			} finally {
 				setIsLoading(false)
 				setIsSwitching(false)
@@ -96,6 +98,7 @@ export default function MonitorDetailsClient({ id }: { id: string }) {
 	)
 
 	useEffect(() => {
+		if (!id) return
 		fetchMonitorData(period, true)
 	}, [id])
 
@@ -112,6 +115,29 @@ export default function MonitorDetailsClient({ id }: { id: string }) {
 
 	if (!data)
 		return <div className='p-10 text-center'>Ошибка: данные не найдены</div>
+
+	const handleExportCSV = async () => {
+		try {
+			// fetchWithRefresh возвращает уже response.data, как axios
+			const res = await fetchWithRefresh(`/monitors/${id}/export-csv`, {
+				responseType: 'blob', // чтобы получить файл
+			})
+
+			// Создаем blob и скачиваем
+			const blob = new Blob([res.data], { type: 'text/csv' })
+			const url = window.URL.createObjectURL(blob)
+			const a = document.createElement('a')
+			a.href = url
+			a.download = `${id}.csv`
+			document.body.appendChild(a)
+			a.click()
+			a.remove()
+			window.URL.revokeObjectURL(url)
+		} catch (err: any) {
+			console.error(err)
+			toast.error(err.response?.data?.message || 'Ошибка при скачивании CSV')
+		}
+	}
 
 	return (
 		<main className='min-h-screen bg-slate-50 p-6 transition-colors duration-500 dark:bg-slate-950 md:p-12'>
@@ -145,9 +171,7 @@ export default function MonitorDetailsClient({ id }: { id: string }) {
 
 					<div className='flex flex-wrap items-center gap-3'>
 						<Button
-							onClick={() =>
-								window.open(`${BASE_URL}/monitors/${id}/export-csv`)
-							}
+							onClick={handleExportCSV}
 							variant='outline'
 							className='rounded-xl border-slate-200 dark:border-slate-800 dark:bg-slate-900'
 						>

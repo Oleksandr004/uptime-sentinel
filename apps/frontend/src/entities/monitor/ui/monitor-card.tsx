@@ -23,6 +23,8 @@ import {
 	AlertDialogTitle,
 	AlertDialogTrigger,
 } from '@/shared/ui/alert-dialog'
+import { fetchWithRefresh } from '@/shared/api/fetch-with-refresh'
+import { toast } from 'sonner'
 
 interface MonitorCardProps {
 	id: string
@@ -70,15 +72,19 @@ export const MonitorCard = ({
 
 	const handleDelete = async () => {
 		try {
-			const response = await fetch(
-				`${
-					process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'
-				}/monitors/${id}`,
-				{ method: 'DELETE' }
-			)
-			if (response.ok) window.location.reload()
+			const response = await fetchWithRefresh(`/monitors/${id}`, {
+				method: 'DELETE',
+			})
+
+			if (response.status >= 200 && response.status < 300) {
+				toast.success('Монитор удалён')
+				window.location.reload()
+			} else {
+				toast.error('Ошибка при удалении монитора')
+			}
 		} catch (error) {
 			console.error('Ошибка при удалении:', error)
+			toast.error('Ошибка при удалении монитора')
 		}
 	}
 
