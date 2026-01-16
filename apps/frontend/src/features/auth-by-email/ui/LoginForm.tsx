@@ -134,7 +134,7 @@ export const LoginForm = () => {
 		try {
 			const { data } = await api.post('/auth/login', values)
 			setUser(data.user)
-			toast.success(`Добро пожаловать, ${data.user.name}!`) // Успех всё же пишем вручную
+			toast.success(`Добро пожаловать!`) // Успех всё же пишем вручную
 			router.push('/')
 			router.refresh()
 		} catch (err: any) {
