@@ -764,8 +764,8 @@ export const MonitorScalarFieldEnum = {
   url: 'url',
   interval: 'interval',
   status: 'status',
-  userid: 'userid',
-  createdat: 'createdat',
+  userId: 'userId',
+  createdAt: 'createdAt',
   updatedat: 'updatedat'
 } as const
 
@@ -774,11 +774,11 @@ export type MonitorScalarFieldEnum = (typeof MonitorScalarFieldEnum)[keyof typeo
 
 export const CheckLogScalarFieldEnum = {
   id: 'id',
-  monitorid: 'monitorid',
-  statuscode: 'statuscode',
-  responsetime: 'responsetime',
+  monitorId: 'monitorId',
+  statusCode: 'statusCode',
+  responseTime: 'responseTime',
   status: 'status',
-  createdat: 'createdat'
+  createdAt: 'createdAt'
 } as const
 
 export type CheckLogScalarFieldEnum = (typeof CheckLogScalarFieldEnum)[keyof typeof CheckLogScalarFieldEnum]

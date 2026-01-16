@@ -1,5 +1,6 @@
 generator client {
   provider = "prisma-client"
+  binaryTargets = ["native", "linux-musl-openssl-3.0.x"]
   output   = "./generated/prisma"
 }
 
@@ -19,8 +20,6 @@ model User {
   updatedAt                 DateTime? @default(now()) @db.Timestamptz(6)
   currentHashedRefreshToken String?
   Monitor                   Monitor[]
-
-  @@map("user")
 }
 
 model Monitor {
@@ -29,21 +28,21 @@ model Monitor {
   url       String     @db.VarChar(2048)
   interval  Int        @default(60)
   status    Status     @default(PENDING)
-  userid    String     @db.Uuid
-  createdat DateTime?  @default(now()) @db.Timestamptz(6)
+  userId    String     @map("userid") @db.Uuid 
+  createdAt DateTime?  @default(now()) @db.Timestamptz(6) @map("createdat")
   updatedat DateTime?  @default(now()) @db.Timestamptz(6)
-  user      User       @relation(fields: [userid], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_monitor_user")
+  user      User       @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_monitor_user")
   checks    CheckLog[] @relation("MonitorChecks")
 }
 
 model CheckLog {
   id           String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  monitorid    String    @db.Uuid
-  statuscode   Int?
-  responsetime Int
+  monitorId    String    @db.Uuid @map("monitorid")
+  statusCode   Int?      @map("statuscode")
+  responseTime Int       @map("responsetime")
   status       Status    @default(PENDING)
-  createdat    DateTime? @default(now()) @db.Timestamptz(6)
-  monitor      Monitor   @relation("MonitorChecks", fields: [monitorid], references: [id])
+  createdAt    DateTime? @default(now()) @db.Timestamptz(6) @map("createdat")
+  monitor      Monitor   @relation("MonitorChecks", fields: [monitorId], references: [id])
 }
 
 model Incident {

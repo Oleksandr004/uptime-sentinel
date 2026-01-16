@@ -20,7 +20,7 @@ export class MonitorService {
         url: dto.url,
         interval: dto.interval,
         status: 'PENDING',
-        userid: userId, // Обязательное поле после миграции
+        userId: userId, // Обязательное поле после миграции
       },
     });
 
@@ -41,7 +41,7 @@ export class MonitorService {
 
   async findAll(userId: string) {
     return this.prisma.monitor.findMany({
-      where: { userid: userId }, // исправлено: userid вместо userId
+      where: { userId: userId }, // исправлено: userid вместо userId
       include: {
         checks: {
           take: 10,
@@ -60,7 +60,7 @@ export class MonitorService {
     else startDate.setHours(startDate.getHours() - 24);
 
     const monitor = await this.prisma.monitor.findFirst({
-      where: { id, userId }, // Проверка владения
+      where: { id, userId: userId }, // Проверка владения
       include: {
         checks: {
           where: {
@@ -79,7 +79,7 @@ export class MonitorService {
   async remove(userId: string, id: string) {
     // Проверяем, существует ли монитор и принадлежит ли он юзеру
     const monitor = await this.prisma.monitor.findFirst({
-      where: { id, userId },
+      where: { id, userId: userId },
     });
 
     if (!monitor) throw new NotFoundException('Монитор не найден');
@@ -100,7 +100,7 @@ export class MonitorService {
 
   async exportToCsv(userId: string, id: string): Promise<string> {
     const monitor = await this.prisma.monitor.findFirst({
-      where: { id, userId },
+      where: { id, userId: userId },
       include: {
         checks: {
           orderBy: { createdAt: 'desc' },
@@ -114,7 +114,7 @@ export class MonitorService {
     const data = monitor.checks.map((check) => ({
       'Resource Name': monitor.name,
       URL: monitor.url,
-      Date: check.createdAt.toISOString(),
+      Date: check.createdAt?.toISOString(),
       Status: check.status,
       'Response Time (ms)': check.responseTime,
       'Status Code': check.statusCode || 'N/A',

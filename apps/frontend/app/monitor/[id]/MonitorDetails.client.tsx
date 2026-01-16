@@ -85,10 +85,10 @@ export default function MonitorDetailsClient({ id }: { id: string }) {
 			isInitial ? setIsLoading(true) : setIsSwitching(true)
 
 			try {
-				const res = await api.get(`/monitors/${id}`, {
+				const res = fetchWithRefresh(`/monitors/${id}`, {
 					params: { period: selectedPeriod },
 				})
-				setData(res.data)
+				setData(res)
 			} finally {
 				setIsLoading(false)
 				setIsSwitching(false)

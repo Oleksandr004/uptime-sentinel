@@ -27,79 +27,79 @@ export type AggregateCheckLog = {
 }
 
 export type CheckLogAvgAggregateOutputType = {
-  statuscode: number | null
-  responsetime: number | null
+  statusCode: number | null
+  responseTime: number | null
 }
 
 export type CheckLogSumAggregateOutputType = {
-  statuscode: number | null
-  responsetime: number | null
+  statusCode: number | null
+  responseTime: number | null
 }
 
 export type CheckLogMinAggregateOutputType = {
   id: string | null
-  monitorid: string | null
-  statuscode: number | null
-  responsetime: number | null
+  monitorId: string | null
+  statusCode: number | null
+  responseTime: number | null
   status: $Enums.Status | null
-  createdat: Date | null
+  createdAt: Date | null
 }
 
 export type CheckLogMaxAggregateOutputType = {
   id: string | null
-  monitorid: string | null
-  statuscode: number | null
-  responsetime: number | null
+  monitorId: string | null
+  statusCode: number | null
+  responseTime: number | null
   status: $Enums.Status | null
-  createdat: Date | null
+  createdAt: Date | null
 }
 
 export type CheckLogCountAggregateOutputType = {
   id: number
-  monitorid: number
-  statuscode: number
-  responsetime: number
+  monitorId: number
+  statusCode: number
+  responseTime: number
   status: number
-  createdat: number
+  createdAt: number
   _all: number
 }
 
 
 export type CheckLogAvgAggregateInputType = {
-  statuscode?: true
-  responsetime?: true
+  statusCode?: true
+  responseTime?: true
 }
 
 export type CheckLogSumAggregateInputType = {
-  statuscode?: true
-  responsetime?: true
+  statusCode?: true
+  responseTime?: true
 }
 
 export type CheckLogMinAggregateInputType = {
   id?: true
-  monitorid?: true
-  statuscode?: true
-  responsetime?: true
+  monitorId?: true
+  statusCode?: true
+  responseTime?: true
   status?: true
-  createdat?: true
+  createdAt?: true
 }
 
 export type CheckLogMaxAggregateInputType = {
   id?: true
-  monitorid?: true
-  statuscode?: true
-  responsetime?: true
+  monitorId?: true
+  statusCode?: true
+  responseTime?: true
   status?: true
-  createdat?: true
+  createdAt?: true
 }
 
 export type CheckLogCountAggregateInputType = {
   id?: true
-  monitorid?: true
-  statuscode?: true
-  responsetime?: true
+  monitorId?: true
+  statusCode?: true
+  responseTime?: true
   status?: true
-  createdat?: true
+  createdAt?: true
   _all?: true
 }
 
@@ -191,11 +191,11 @@ export type CheckLogGroupByArgs<ExtArgs extends runtime.Types.Extensions.Interna
 
 export type CheckLogGroupByOutputType = {
   id: string
-  monitorid: string
-  statuscode: number | null
-  responsetime: number
+  monitorId: string
+  statusCode: number | null
+  responseTime: number
   status: $Enums.Status
-  createdat: Date | null
+  createdAt: Date | null
   _count: CheckLogCountAggregateOutputType | null
   _avg: CheckLogAvgAggregateOutputType | null
   _sum: CheckLogSumAggregateOutputType | null
@@ -223,21 +223,21 @@ export type CheckLogWhereInput = {
   OR?: Prisma.CheckLogWhereInput[]
   NOT?: Prisma.CheckLogWhereInput | Prisma.CheckLogWhereInput[]
   id?: Prisma.UuidFilter<"CheckLog"> | string
-  monitorid?: Prisma.UuidFilter<"CheckLog"> | string
-  statuscode?: Prisma.IntNullableFilter<"CheckLog"> | number | null
-  responsetime?: Prisma.IntFilter<"CheckLog"> | number
+  monitorId?: Prisma.UuidFilter<"CheckLog"> | string
+  statusCode?: Prisma.IntNullableFilter<"CheckLog"> | number | null
+  responseTime?: Prisma.IntFilter<"CheckLog"> | number
   status?: Prisma.EnumStatusFilter<"CheckLog"> | $Enums.Status
-  createdat?: Prisma.DateTimeNullableFilter<"CheckLog"> | Date | string | null
+  createdAt?: Prisma.DateTimeNullableFilter<"CheckLog"> | Date | string | null
   monitor?: Prisma.XOR<Prisma.MonitorScalarRelationFilter, Prisma.MonitorWhereInput>
 }
 
 export type CheckLogOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  monitorid?: Prisma.SortOrder
-  statuscode?: Prisma.SortOrderInput | Prisma.SortOrder
-  responsetime?: Prisma.SortOrder
+  monitorId?: Prisma.SortOrder
+  statusCode?: Prisma.SortOrderInput | Prisma.SortOrder
+  responseTime?: Prisma.SortOrder
   status?: Prisma.SortOrder
-  createdat?: Prisma.SortOrderInput | Prisma.SortOrder
+  createdAt?: Prisma.SortOrderInput | Prisma.SortOrder
   monitor?: Prisma.MonitorOrderByWithRelationInput
 }
 
@@ -246,21 +246,21 @@ export type CheckLogWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.CheckLogWhereInput | Prisma.CheckLogWhereInput[]
   OR?: Prisma.CheckLogWhereInput[]
   NOT?: Prisma.CheckLogWhereInput | Prisma.CheckLogWhereInput[]
-  monitorid?: Prisma.UuidFilter<"CheckLog"> | string
-  statuscode?: Prisma.IntNullableFilter<"CheckLog"> | number | null
-  responsetime?: Prisma.IntFilter<"CheckLog"> | number
+  monitorId?: Prisma.UuidFilter<"CheckLog"> | string
+  statusCode?: Prisma.IntNullableFilter<"CheckLog"> | number | null
+  responseTime?: Prisma.IntFilter<"CheckLog"> | number
   status?: Prisma.EnumStatusFilter<"CheckLog"> | $Enums.Status
-  createdat?: Prisma.DateTimeNullableFilter<"CheckLog"> | Date | string | null
+  createdAt?: Prisma.DateTimeNullableFilter<"CheckLog"> | Date | string | null
   monitor?: Prisma.XOR<Prisma.MonitorScalarRelationFilter, Prisma.MonitorWhereInput>
 }, "id">
 
 export type CheckLogOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  monitorid?: Prisma.SortOrder
-  statuscode?: Prisma.SortOrderInput | Prisma.SortOrder
-  responsetime?: Prisma.SortOrder
+  monitorId?: Prisma.SortOrder
+  statusCode?: Prisma.SortOrderInput | Prisma.SortOrder
+  responseTime?: Prisma.SortOrder
   status?: Prisma.SortOrder
-  createdat?: Prisma.SortOrderInput | Prisma.SortOrder
+  createdAt?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.CheckLogCountOrderByAggregateInput
   _avg?: Prisma.CheckLogAvgOrderByAggregateInput
   _max?: Prisma.CheckLogMaxOrderByAggregateInput
@@ -273,73 +273,73 @@ export type CheckLogScalarWhereWithAggregatesInput = {
   OR?: Prisma.CheckLogScalarWhereWithAggregatesInput[]
   NOT?: Prisma.CheckLogScalarWhereWithAggregatesInput | Prisma.CheckLogScalarWhereWithAggregatesInput[]
   id?: Prisma.UuidWithAggregatesFilter<"CheckLog"> | string
-  monitorid?: Prisma.UuidWithAggregatesFilter<"CheckLog"> | string
-  statuscode?: Prisma.IntNullableWithAggregatesFilter<"CheckLog"> | number | null
-  responsetime?: Prisma.IntWithAggregatesFilter<"CheckLog"> | number
+  monitorId?: Prisma.UuidWithAggregatesFilter<"CheckLog"> | string
+  statusCode?: Prisma.IntNullableWithAggregatesFilter<"CheckLog"> | number | null
+  responseTime?: Prisma.IntWithAggregatesFilter<"CheckLog"> | number
   status?: Prisma.EnumStatusWithAggregatesFilter<"CheckLog"> | $Enums.Status
-  createdat?: Prisma.DateTimeNullableWithAggregatesFilter<"CheckLog"> | Date | string | null
+  createdAt?: Prisma.DateTimeNullableWithAggregatesFilter<"CheckLog"> | Date | string | null
 }
 
 export type CheckLogCreateInput = {
   id?: string
-  statuscode?: number | null
-  responsetime: number
+  statusCode?: number | null
+  responseTime: number
   status?: $Enums.Status
-  createdat?: Date | string | null
+  createdAt?: Date | string | null
   monitor: Prisma.MonitorCreateNestedOneWithoutChecksInput
 }
 
 export type CheckLogUncheckedCreateInput = {
   id?: string
-  monitorid: string
-  statuscode?: number | null
-  responsetime: number
+  monitorId: string
+  statusCode?: number | null
+  responseTime: number
   status?: $Enums.Status
-  createdat?: Date | string | null
+  createdAt?: Date | string | null
 }
 
 export type CheckLogUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  statuscode?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  responsetime?: Prisma.IntFieldUpdateOperationsInput | number
+  statusCode?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  responseTime?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumStatusFieldUpdateOperationsInput | $Enums.Status
-  createdat?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   monitor?: Prisma.MonitorUpdateOneRequiredWithoutChecksNestedInput
 }
 
 export type CheckLogUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  monitorid?: Prisma.StringFieldUpdateOperationsInput | string
-  statuscode?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  responsetime?: Prisma.IntFieldUpdateOperationsInput | number
+  monitorId?: Prisma.StringFieldUpdateOperationsInput | string
+  statusCode?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  responseTime?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumStatusFieldUpdateOperationsInput | $Enums.Status
-  createdat?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type CheckLogCreateManyInput = {
   id?: string
-  monitorid: string
-  statuscode?: number | null
-  responsetime: number
+  monitorId: string
+  statusCode?: number | null
+  responseTime: number
   status?: $Enums.Status
-  createdat?: Date | string | null
+  createdAt?: Date | string | null
 }
 
 export type CheckLogUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  statuscode?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  responsetime?: Prisma.IntFieldUpdateOperationsInput | number
+  statusCode?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  responseTime?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumStatusFieldUpdateOperationsInput | $Enums.Status
-  createdat?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type CheckLogUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  monitorid?: Prisma.StringFieldUpdateOperationsInput | string
-  statuscode?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  responsetime?: Prisma.IntFieldUpdateOperationsInput | number
+  monitorId?: Prisma.StringFieldUpdateOperationsInput | string
+  statusCode?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  responseTime?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumStatusFieldUpdateOperationsInput | $Enums.Status
-  createdat?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type CheckLogListRelationFilter = {
@@ -354,39 +354,39 @@ export type CheckLogOrderByRelationAggregateInput = {
 
 export type CheckLogCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  monitorid?: Prisma.SortOrder
-  statuscode?: Prisma.SortOrder
-  responsetime?: Prisma.SortOrder
+  monitorId?: Prisma.SortOrder
+  statusCode?: Prisma.SortOrder
+  responseTime?: Prisma.SortOrder
   status?: Prisma.SortOrder
-  createdat?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
 }
 
 export type CheckLogAvgOrderByAggregateInput = {
-  statuscode?: Prisma.SortOrder
-  responsetime?: Prisma.SortOrder
+  statusCode?: Prisma.SortOrder
+  responseTime?: Prisma.SortOrder
 }
 
 export type CheckLogMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  monitorid?: Prisma.SortOrder
-  statuscode?: Prisma.SortOrder
-  responsetime?: Prisma.SortOrder
+  monitorId?: Prisma.SortOrder
+  statusCode?: Prisma.SortOrder
+  responseTime?: Prisma.SortOrder
   status?: Prisma.SortOrder
-  createdat?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
 }
 
 export type CheckLogMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  monitorid?: Prisma.SortOrder
-  statuscode?: Prisma.SortOrder
-  responsetime?: Prisma.SortOrder
+  monitorId?: Prisma.SortOrder
+  statusCode?: Prisma.SortOrder
+  responseTime?: Prisma.SortOrder
   status?: Prisma.SortOrder
-  createdat?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
 }
 
 export type CheckLogSumOrderByAggregateInput = {
-  statuscode?: Prisma.SortOrder
-  responsetime?: Prisma.SortOrder
+  statusCode?: Prisma.SortOrder
+  responseTime?: Prisma.SortOrder
 }
 
 export type CheckLogCreateNestedManyWithoutMonitorInput = {
@@ -441,18 +441,18 @@ export type NullableIntFieldUpdateOperationsInput = {
 
 export type CheckLogCreateWithoutMonitorInput = {
   id?: string
-  statuscode?: number | null
-  responsetime: number
+  statusCode?: number | null
+  responseTime: number
   status?: $Enums.Status
-  createdat?: Date | string | null
+  createdAt?: Date | string | null
 }
 
 export type CheckLogUncheckedCreateWithoutMonitorInput = {
   id?: string
-  statuscode?: number | null
-  responsetime: number
+  statusCode?: number | null
+  responseTime: number
   status?: $Enums.Status
-  createdat?: Date | string | null
+  createdAt?: Date | string | null
 }
 
 export type CheckLogCreateOrConnectWithoutMonitorInput = {
@@ -486,87 +486,87 @@ export type CheckLogScalarWhereInput = {
   OR?: Prisma.CheckLogScalarWhereInput[]
   NOT?: Prisma.CheckLogScalarWhereInput | Prisma.CheckLogScalarWhereInput[]
   id?: Prisma.UuidFilter<"CheckLog"> | string
-  monitorid?: Prisma.UuidFilter<"CheckLog"> | string
-  statuscode?: Prisma.IntNullableFilter<"CheckLog"> | number | null
-  responsetime?: Prisma.IntFilter<"CheckLog"> | number
+  monitorId?: Prisma.UuidFilter<"CheckLog"> | string
+  statusCode?: Prisma.IntNullableFilter<"CheckLog"> | number | null
+  responseTime?: Prisma.IntFilter<"CheckLog"> | number
   status?: Prisma.EnumStatusFilter<"CheckLog"> | $Enums.Status
-  createdat?: Prisma.DateTimeNullableFilter<"CheckLog"> | Date | string | null
+  createdAt?: Prisma.DateTimeNullableFilter<"CheckLog"> | Date | string | null
 }
 
 export type CheckLogCreateManyMonitorInput = {
   id?: string
-  statuscode?: number | null
-  responsetime: number
+  statusCode?: number | null
+  responseTime: number
   status?: $Enums.Status
-  createdat?: Date | string | null
+  createdAt?: Date | string | null
 }
 
 export type CheckLogUpdateWithoutMonitorInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  statuscode?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  responsetime?: Prisma.IntFieldUpdateOperationsInput | number
+  statusCode?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  responseTime?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumStatusFieldUpdateOperationsInput | $Enums.Status
-  createdat?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type CheckLogUncheckedUpdateWithoutMonitorInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  statuscode?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  responsetime?: Prisma.IntFieldUpdateOperationsInput | number
+  statusCode?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  responseTime?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumStatusFieldUpdateOperationsInput | $Enums.Status
-  createdat?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type CheckLogUncheckedUpdateManyWithoutMonitorInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  statuscode?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  responsetime?: Prisma.IntFieldUpdateOperationsInput | number
+  statusCode?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  responseTime?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumStatusFieldUpdateOperationsInput | $Enums.Status
-  createdat?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 
 
 export type CheckLogSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  monitorid?: boolean
-  statuscode?: boolean
-  responsetime?: boolean
+  monitorId?: boolean
+  statusCode?: boolean
+  responseTime?: boolean
   status?: boolean
-  createdat?: boolean
+  createdAt?: boolean
   monitor?: boolean | Prisma.MonitorDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["checkLog"]>
 
 export type CheckLogSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  monitorid?: boolean
-  statuscode?: boolean
-  responsetime?: boolean
+  monitorId?: boolean
+  statusCode?: boolean
+  responseTime?: boolean
   status?: boolean
-  createdat?: boolean
+  createdAt?: boolean
   monitor?: boolean | Prisma.MonitorDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["checkLog"]>
 
 export type CheckLogSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  monitorid?: boolean
-  statuscode?: boolean
-  responsetime?: boolean
+  monitorId?: boolean
+  statusCode?: boolean
+  responseTime?: boolean
   status?: boolean
-  createdat?: boolean
+  createdAt?: boolean
   monitor?: boolean | Prisma.MonitorDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["checkLog"]>
 
 export type CheckLogSelectScalar = {
   id?: boolean
-  monitorid?: boolean
-  statuscode?: boolean
-  responsetime?: boolean
+  monitorId?: boolean
+  statusCode?: boolean
+  responseTime?: boolean
   status?: boolean
-  createdat?: boolean
+  createdAt?: boolean
 }
 
-export type CheckLogOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "monitorid" | "statuscode" | "responsetime" | "status" | "createdat", ExtArgs["result"]["checkLog"]>
+export type CheckLogOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "monitorId" | "statusCode" | "responseTime" | "status" | "createdAt", ExtArgs["result"]["checkLog"]>
 export type CheckLogInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   monitor?: boolean | Prisma.MonitorDefaultArgs<ExtArgs>
 }
@@ -584,11 +584,11 @@ export type $CheckLogPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
-    monitorid: string
-    statuscode: number | null
-    responsetime: number
+    monitorId: string
+    statusCode: number | null
+    responseTime: number
     status: $Enums.Status
-    createdat: Date | null
+    createdAt: Date | null
   }, ExtArgs["result"]["checkLog"]>
   composites: {}
 }
@@ -1014,11 +1014,11 @@ export interface Prisma__CheckLogClient<T, Null = never, ExtArgs extends runtime
  */
 export interface CheckLogFieldRefs {
   readonly id: Prisma.FieldRef<"CheckLog", 'String'>
-  readonly monitorid: Prisma.FieldRef<"CheckLog", 'String'>
-  readonly statuscode: Prisma.FieldRef<"CheckLog", 'Int'>
-  readonly responsetime: Prisma.FieldRef<"CheckLog", 'Int'>
+  readonly monitorId: Prisma.FieldRef<"CheckLog", 'String'>
+  readonly statusCode: Prisma.FieldRef<"CheckLog", 'Int'>
+  readonly responseTime: Prisma.FieldRef<"CheckLog", 'Int'>
   readonly status: Prisma.FieldRef<"CheckLog", 'Status'>
-  readonly createdat: Prisma.FieldRef<"CheckLog", 'DateTime'>
+  readonly createdAt: Prisma.FieldRef<"CheckLog", 'DateTime'>
 }
     
 

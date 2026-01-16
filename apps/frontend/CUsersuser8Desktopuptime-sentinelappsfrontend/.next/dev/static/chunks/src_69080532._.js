@@ -266,7 +266,6 @@ __turbopack_context__.s([
     "CreateMonitorForm",
     ()=>CreateMonitorForm
 ]);
-var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$polyfills$2f$process$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = /*#__PURE__*/ __turbopack_context__.i("[project]/node_modules/next/dist/build/polyfills/process.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/jsx-dev-runtime.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/navigation.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$globe$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Globe$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/globe.js [app-client] (ecmascript) <export default as Globe>");
@@ -275,6 +274,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$re
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$loader$2d$circle$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Loader2$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/loader-circle.js [app-client] (ecmascript) <export default as Loader2>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$hook$2d$form$2f$dist$2f$index$2e$esm$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/react-hook-form/dist/index.esm.mjs [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$hookform$2f$resolvers$2f$zod$2f$dist$2f$zod$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/@hookform/resolvers/zod/dist/zod.mjs [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/sonner/dist/index.mjs [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$shared$2f$ui$2f$button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/shared/ui/button.tsx [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$shared$2f$ui$2f$input$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/shared/ui/input.tsx [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$shared$2f$ui$2f$label$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/shared/ui/label.tsx [app-client] (ecmascript)");
@@ -282,9 +282,12 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$shared$2f$ui$2f$card$
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$shared$2f$lib$2f$utils$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/shared/lib/utils.ts [app-client] (ecmascript)");
 // Импортируем схему
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$entities$2f$monitor$2f$model$2f$monitor$2e$schema$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/entities/monitor/model/monitor.schema.ts [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$shared$2f$api$2f$fetch$2d$with$2d$refresh$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/shared/api/fetch-with-refresh.ts [app-client] (ecmascript)");
 ;
 var _s = __turbopack_context__.k.signature();
 'use client';
+;
+;
 ;
 ;
 ;
@@ -310,19 +313,34 @@ const CreateMonitorForm = ()=>{
     const currentInterval = watch('interval');
     const onSubmit = async (data)=>{
         try {
-            const res = await fetch(`${("TURBOPACK compile-time value", "http://localhost:5000")}/monitors`, {
+            const res = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$shared$2f$api$2f$fetch$2d$with$2d$refresh$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["fetchWithRefresh"])('/monitors', {
                 method: 'POST',
-                body: JSON.stringify(data),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            });
-            if (res.ok) {
+                data
+            }) // axios сам сериализует JSON
+            ;
+            if (res.status >= 200 && res.status < 300) {
+                __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].success('Мониторинг запущен!', {
+                    description: `Ресурс ${data.name} успешно добавлен в систему.`
+                });
                 router.push('/');
                 router.refresh();
+            } else {
+                __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error('Ошибка создания', {
+                    description: 'Не удалось сохранить монитор. Попробуйте позже.'
+                });
             }
         } catch (err) {
-            console.error('Fetch error:', err);
+            console.error('Axios error:', err);
+            // Можно показать более подробное сообщение, если есть ответ сервера
+            if (err.response?.data?.message) {
+                __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error('Ошибка создания', {
+                    description: err.response.data.message
+                });
+            } else {
+                __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error('Ошибка создания', {
+                    description: 'Не удалось сохранить монитор. Попробуйте позже.'
+                });
+            }
         }
     };
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
@@ -341,14 +359,14 @@ const CreateMonitorForm = ()=>{
                                         className: "w-5 h-5 text-blue-600 dark:text-blue-500"
                                     }, void 0, false, {
                                         fileName: "[project]/src/features/monitor/create-monitor/ui/create-form.tsx",
-                                        lineNumber: 70,
+                                        lineNumber: 89,
                                         columnNumber: 7
                                     }, ("TURBOPACK compile-time value", void 0)),
                                     "Основные данные"
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/features/monitor/create-monitor/ui/create-form.tsx",
-                                lineNumber: 69,
+                                lineNumber: 88,
                                 columnNumber: 6
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$shared$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CardDescription"], {
@@ -356,13 +374,13 @@ const CreateMonitorForm = ()=>{
                                 children: "Введите название и адрес ресурса"
                             }, void 0, false, {
                                 fileName: "[project]/src/features/monitor/create-monitor/ui/create-form.tsx",
-                                lineNumber: 73,
+                                lineNumber: 92,
                                 columnNumber: 6
                             }, ("TURBOPACK compile-time value", void 0))
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/features/monitor/create-monitor/ui/create-form.tsx",
-                        lineNumber: 68,
+                        lineNumber: 87,
                         columnNumber: 5
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$shared$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CardContent"], {
@@ -377,7 +395,7 @@ const CreateMonitorForm = ()=>{
                                         children: "Название"
                                     }, void 0, false, {
                                         fileName: "[project]/src/features/monitor/create-monitor/ui/create-form.tsx",
-                                        lineNumber: 80,
+                                        lineNumber: 99,
                                         columnNumber: 7
                                     }, ("TURBOPACK compile-time value", void 0)),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$shared$2f$ui$2f$input$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
@@ -387,7 +405,7 @@ const CreateMonitorForm = ()=>{
                                         className: (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$shared$2f$lib$2f$utils$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["cn"])('bg-white dark:bg-slate-950 dark:border-slate-800 dark:text-slate-100', errors.name && 'border-red-500 focus-visible:ring-red-500')
                                     }, void 0, false, {
                                         fileName: "[project]/src/features/monitor/create-monitor/ui/create-form.tsx",
-                                        lineNumber: 86,
+                                        lineNumber: 105,
                                         columnNumber: 7
                                     }, ("TURBOPACK compile-time value", void 0)),
                                     errors.name && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -395,13 +413,13 @@ const CreateMonitorForm = ()=>{
                                         children: errors.name.message
                                     }, void 0, false, {
                                         fileName: "[project]/src/features/monitor/create-monitor/ui/create-form.tsx",
-                                        lineNumber: 96,
+                                        lineNumber: 115,
                                         columnNumber: 8
                                     }, ("TURBOPACK compile-time value", void 0))
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/features/monitor/create-monitor/ui/create-form.tsx",
-                                lineNumber: 79,
+                                lineNumber: 98,
                                 columnNumber: 6
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -413,7 +431,7 @@ const CreateMonitorForm = ()=>{
                                         children: "URL адрес"
                                     }, void 0, false, {
                                         fileName: "[project]/src/features/monitor/create-monitor/ui/create-form.tsx",
-                                        lineNumber: 103,
+                                        lineNumber: 122,
                                         columnNumber: 7
                                     }, ("TURBOPACK compile-time value", void 0)),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -423,7 +441,7 @@ const CreateMonitorForm = ()=>{
                                                 className: "absolute left-3 top-3 h-4 w-4 text-slate-400 dark:text-slate-500"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/features/monitor/create-monitor/ui/create-form.tsx",
-                                                lineNumber: 107,
+                                                lineNumber: 126,
                                                 columnNumber: 8
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$shared$2f$ui$2f$input$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
@@ -433,13 +451,13 @@ const CreateMonitorForm = ()=>{
                                                 placeholder: "https://example.com"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/features/monitor/create-monitor/ui/create-form.tsx",
-                                                lineNumber: 108,
+                                                lineNumber: 127,
                                                 columnNumber: 8
                                             }, ("TURBOPACK compile-time value", void 0))
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/features/monitor/create-monitor/ui/create-form.tsx",
-                                        lineNumber: 106,
+                                        lineNumber: 125,
                                         columnNumber: 7
                                     }, ("TURBOPACK compile-time value", void 0)),
                                     errors.url && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -447,25 +465,25 @@ const CreateMonitorForm = ()=>{
                                         children: errors.url.message
                                     }, void 0, false, {
                                         fileName: "[project]/src/features/monitor/create-monitor/ui/create-form.tsx",
-                                        lineNumber: 119,
+                                        lineNumber: 138,
                                         columnNumber: 8
                                     }, ("TURBOPACK compile-time value", void 0))
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/features/monitor/create-monitor/ui/create-form.tsx",
-                                lineNumber: 102,
+                                lineNumber: 121,
                                 columnNumber: 6
                             }, ("TURBOPACK compile-time value", void 0))
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/features/monitor/create-monitor/ui/create-form.tsx",
-                        lineNumber: 78,
+                        lineNumber: 97,
                         columnNumber: 5
                     }, ("TURBOPACK compile-time value", void 0))
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/features/monitor/create-monitor/ui/create-form.tsx",
-                lineNumber: 67,
+                lineNumber: 86,
                 columnNumber: 4
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$shared$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Card"], {
@@ -479,19 +497,19 @@ const CreateMonitorForm = ()=>{
                                     className: "w-5 h-5 text-blue-600 dark:text-blue-500"
                                 }, void 0, false, {
                                     fileName: "[project]/src/features/monitor/create-monitor/ui/create-form.tsx",
-                                    lineNumber: 131,
+                                    lineNumber: 150,
                                     columnNumber: 7
                                 }, ("TURBOPACK compile-time value", void 0)),
                                 "Частота проверок"
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/features/monitor/create-monitor/ui/create-form.tsx",
-                            lineNumber: 130,
+                            lineNumber: 149,
                             columnNumber: 6
                         }, ("TURBOPACK compile-time value", void 0))
                     }, void 0, false, {
                         fileName: "[project]/src/features/monitor/create-monitor/ui/create-form.tsx",
-                        lineNumber: 129,
+                        lineNumber: 148,
                         columnNumber: 5
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$shared$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CardContent"], {
@@ -511,12 +529,12 @@ const CreateMonitorForm = ()=>{
                                         children: sec < 3600 ? `${sec / 60} мин.` : '1 час'
                                     }, sec, false, {
                                         fileName: "[project]/src/features/monitor/create-monitor/ui/create-form.tsx",
-                                        lineNumber: 139,
+                                        lineNumber: 158,
                                         columnNumber: 8
                                     }, ("TURBOPACK compile-time value", void 0)))
                             }, void 0, false, {
                                 fileName: "[project]/src/features/monitor/create-monitor/ui/create-form.tsx",
-                                lineNumber: 137,
+                                lineNumber: 156,
                                 columnNumber: 6
                             }, ("TURBOPACK compile-time value", void 0)),
                             errors.interval && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -524,19 +542,19 @@ const CreateMonitorForm = ()=>{
                                 children: errors.interval.message
                             }, void 0, false, {
                                 fileName: "[project]/src/features/monitor/create-monitor/ui/create-form.tsx",
-                                lineNumber: 156,
+                                lineNumber: 175,
                                 columnNumber: 7
                             }, ("TURBOPACK compile-time value", void 0))
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/features/monitor/create-monitor/ui/create-form.tsx",
-                        lineNumber: 136,
+                        lineNumber: 155,
                         columnNumber: 5
                     }, ("TURBOPACK compile-time value", void 0))
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/features/monitor/create-monitor/ui/create-form.tsx",
-                lineNumber: 128,
+                lineNumber: 147,
                 columnNumber: 4
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$shared$2f$ui$2f$button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
@@ -550,7 +568,7 @@ const CreateMonitorForm = ()=>{
                             className: "mr-2 h-4 w-4 animate-spin"
                         }, void 0, false, {
                             fileName: "[project]/src/features/monitor/create-monitor/ui/create-form.tsx",
-                            lineNumber: 172,
+                            lineNumber: 191,
                             columnNumber: 7
                         }, ("TURBOPACK compile-time value", void 0)),
                         "Создание..."
@@ -558,13 +576,13 @@ const CreateMonitorForm = ()=>{
                 }, void 0, true) : 'Запустить мониторинг'
             }, void 0, false, {
                 fileName: "[project]/src/features/monitor/create-monitor/ui/create-form.tsx",
-                lineNumber: 164,
+                lineNumber: 183,
                 columnNumber: 4
             }, ("TURBOPACK compile-time value", void 0))
         ]
     }, void 0, true, {
         fileName: "[project]/src/features/monitor/create-monitor/ui/create-form.tsx",
-        lineNumber: 65,
+        lineNumber: 84,
         columnNumber: 3
     }, ("TURBOPACK compile-time value", void 0));
 };

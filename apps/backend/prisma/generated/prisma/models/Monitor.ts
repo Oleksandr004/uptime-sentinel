@@ -40,8 +40,8 @@ export type MonitorMinAggregateOutputType = {
   url: string | null
   interval: number | null
   status: $Enums.Status | null
-  userid: string | null
-  createdat: Date | null
+  userId: string | null
+  createdAt: Date | null
   updatedat: Date | null
 }
 
@@ -51,8 +51,8 @@ export type MonitorMaxAggregateOutputType = {
   url: string | null
   interval: number | null
   status: $Enums.Status | null
-  userid: string | null
-  createdat: Date | null
+  userId: string | null
+  createdAt: Date | null
   updatedat: Date | null
 }
 
@@ -62,8 +62,8 @@ export type MonitorCountAggregateOutputType = {
   url: number
   interval: number
   status: number
-  userid: number
-  createdat: number
+  userId: number
+  createdAt: number
   updatedat: number
   _all: number
 }
@@ -83,8 +83,8 @@ export type MonitorMinAggregateInputType = {
   url?: true
   interval?: true
   status?: true
-  userid?: true
-  createdat?: true
+  userId?: true
+  createdAt?: true
   updatedat?: true
 }
 
@@ -94,8 +94,8 @@ export type MonitorMaxAggregateInputType = {
   url?: true
   interval?: true
   status?: true
-  userid?: true
-  createdat?: true
+  userId?: true
+  createdAt?: true
   updatedat?: true
 }
 
@@ -105,8 +105,8 @@ export type MonitorCountAggregateInputType = {
   url?: true
   interval?: true
   status?: true
-  userid?: true
-  createdat?: true
+  userId?: true
+  createdAt?: true
   updatedat?: true
   _all?: true
 }
@@ -203,8 +203,8 @@ export type MonitorGroupByOutputType = {
   url: string
   interval: number
   status: $Enums.Status
-  userid: string
-  createdat: Date | null
+  userId: string
+  createdAt: Date | null
   updatedat: Date | null
   _count: MonitorCountAggregateOutputType | null
   _avg: MonitorAvgAggregateOutputType | null
@@ -237,8 +237,8 @@ export type MonitorWhereInput = {
   url?: Prisma.StringFilter<"Monitor"> | string
   interval?: Prisma.IntFilter<"Monitor"> | number
   status?: Prisma.EnumStatusFilter<"Monitor"> | $Enums.Status
-  userid?: Prisma.UuidFilter<"Monitor"> | string
-  createdat?: Prisma.DateTimeNullableFilter<"Monitor"> | Date | string | null
+  userId?: Prisma.UuidFilter<"Monitor"> | string
+  createdAt?: Prisma.DateTimeNullableFilter<"Monitor"> | Date | string | null
   updatedat?: Prisma.DateTimeNullableFilter<"Monitor"> | Date | string | null
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   checks?: Prisma.CheckLogListRelationFilter
@@ -250,8 +250,8 @@ export type MonitorOrderByWithRelationInput = {
   url?: Prisma.SortOrder
   interval?: Prisma.SortOrder
   status?: Prisma.SortOrder
-  userid?: Prisma.SortOrder
-  createdat?: Prisma.SortOrderInput | Prisma.SortOrder
+  userId?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrderInput | Prisma.SortOrder
   updatedat?: Prisma.SortOrderInput | Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
   checks?: Prisma.CheckLogOrderByRelationAggregateInput
@@ -266,8 +266,8 @@ export type MonitorWhereUniqueInput = Prisma.AtLeast<{
   url?: Prisma.StringFilter<"Monitor"> | string
   interval?: Prisma.IntFilter<"Monitor"> | number
   status?: Prisma.EnumStatusFilter<"Monitor"> | $Enums.Status
-  userid?: Prisma.UuidFilter<"Monitor"> | string
-  createdat?: Prisma.DateTimeNullableFilter<"Monitor"> | Date | string | null
+  userId?: Prisma.UuidFilter<"Monitor"> | string
+  createdAt?: Prisma.DateTimeNullableFilter<"Monitor"> | Date | string | null
   updatedat?: Prisma.DateTimeNullableFilter<"Monitor"> | Date | string | null
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   checks?: Prisma.CheckLogListRelationFilter
@@ -279,8 +279,8 @@ export type MonitorOrderByWithAggregationInput = {
   url?: Prisma.SortOrder
   interval?: Prisma.SortOrder
   status?: Prisma.SortOrder
-  userid?: Prisma.SortOrder
-  createdat?: Prisma.SortOrderInput | Prisma.SortOrder
+  userId?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrderInput | Prisma.SortOrder
   updatedat?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.MonitorCountOrderByAggregateInput
   _avg?: Prisma.MonitorAvgOrderByAggregateInput
@@ -298,8 +298,8 @@ export type MonitorScalarWhereWithAggregatesInput = {
   url?: Prisma.StringWithAggregatesFilter<"Monitor"> | string
   interval?: Prisma.IntWithAggregatesFilter<"Monitor"> | number
   status?: Prisma.EnumStatusWithAggregatesFilter<"Monitor"> | $Enums.Status
-  userid?: Prisma.UuidWithAggregatesFilter<"Monitor"> | string
-  createdat?: Prisma.DateTimeNullableWithAggregatesFilter<"Monitor"> | Date | string | null
+  userId?: Prisma.UuidWithAggregatesFilter<"Monitor"> | string
+  createdAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Monitor"> | Date | string | null
   updatedat?: Prisma.DateTimeNullableWithAggregatesFilter<"Monitor"> | Date | string | null
 }
 
@@ -309,7 +309,7 @@ export type MonitorCreateInput = {
   url: string
   interval?: number
   status?: $Enums.Status
-  createdat?: Date | string | null
+  createdAt?: Date | string | null
   updatedat?: Date | string | null
   user: Prisma.UserCreateNestedOneWithoutMonitorInput
   checks?: Prisma.CheckLogCreateNestedManyWithoutMonitorInput
@@ -321,8 +321,8 @@ export type MonitorUncheckedCreateInput = {
   url: string
   interval?: number
   status?: $Enums.Status
-  userid: string
-  createdat?: Date | string | null
+  userId: string
+  createdAt?: Date | string | null
   updatedat?: Date | string | null
   checks?: Prisma.CheckLogUncheckedCreateNestedManyWithoutMonitorInput
 }
@@ -333,7 +333,7 @@ export type MonitorUpdateInput = {
   url?: Prisma.StringFieldUpdateOperationsInput | string
   interval?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumStatusFieldUpdateOperationsInput | $Enums.Status
-  createdat?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updatedat?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   user?: Prisma.UserUpdateOneRequiredWithoutMonitorNestedInput
   checks?: Prisma.CheckLogUpdateManyWithoutMonitorNestedInput
@@ -345,8 +345,8 @@ export type MonitorUncheckedUpdateInput = {
   url?: Prisma.StringFieldUpdateOperationsInput | string
   interval?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumStatusFieldUpdateOperationsInput | $Enums.Status
-  userid?: Prisma.StringFieldUpdateOperationsInput | string
-  createdat?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updatedat?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   checks?: Prisma.CheckLogUncheckedUpdateManyWithoutMonitorNestedInput
 }
@@ -357,8 +357,8 @@ export type MonitorCreateManyInput = {
   url: string
   interval?: number
   status?: $Enums.Status
-  userid: string
-  createdat?: Date | string | null
+  userId: string
+  createdAt?: Date | string | null
   updatedat?: Date | string | null
 }
 
@@ -368,7 +368,7 @@ export type MonitorUpdateManyMutationInput = {
   url?: Prisma.StringFieldUpdateOperationsInput | string
   interval?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumStatusFieldUpdateOperationsInput | $Enums.Status
-  createdat?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updatedat?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
@@ -378,8 +378,8 @@ export type MonitorUncheckedUpdateManyInput = {
   url?: Prisma.StringFieldUpdateOperationsInput | string
   interval?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumStatusFieldUpdateOperationsInput | $Enums.Status
-  userid?: Prisma.StringFieldUpdateOperationsInput | string
-  createdat?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updatedat?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
@@ -399,8 +399,8 @@ export type MonitorCountOrderByAggregateInput = {
   url?: Prisma.SortOrder
   interval?: Prisma.SortOrder
   status?: Prisma.SortOrder
-  userid?: Prisma.SortOrder
-  createdat?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
   updatedat?: Prisma.SortOrder
 }
 
@@ -414,8 +414,8 @@ export type MonitorMaxOrderByAggregateInput = {
   url?: Prisma.SortOrder
   interval?: Prisma.SortOrder
   status?: Prisma.SortOrder
-  userid?: Prisma.SortOrder
-  createdat?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
   updatedat?: Prisma.SortOrder
 }
 
@@ -425,8 +425,8 @@ export type MonitorMinOrderByAggregateInput = {
   url?: Prisma.SortOrder
   interval?: Prisma.SortOrder
   status?: Prisma.SortOrder
-  userid?: Prisma.SortOrder
-  createdat?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
   updatedat?: Prisma.SortOrder
 }
 
@@ -513,7 +513,7 @@ export type MonitorCreateWithoutUserInput = {
   url: string
   interval?: number
   status?: $Enums.Status
-  createdat?: Date | string | null
+  createdAt?: Date | string | null
   updatedat?: Date | string | null
   checks?: Prisma.CheckLogCreateNestedManyWithoutMonitorInput
 }
@@ -524,7 +524,7 @@ export type MonitorUncheckedCreateWithoutUserInput = {
   url: string
   interval?: number
   status?: $Enums.Status
-  createdat?: Date | string | null
+  createdAt?: Date | string | null
   updatedat?: Date | string | null
   checks?: Prisma.CheckLogUncheckedCreateNestedManyWithoutMonitorInput
 }
@@ -564,8 +564,8 @@ export type MonitorScalarWhereInput = {
   url?: Prisma.StringFilter<"Monitor"> | string
   interval?: Prisma.IntFilter<"Monitor"> | number
   status?: Prisma.EnumStatusFilter<"Monitor"> | $Enums.Status
-  userid?: Prisma.UuidFilter<"Monitor"> | string
-  createdat?: Prisma.DateTimeNullableFilter<"Monitor"> | Date | string | null
+  userId?: Prisma.UuidFilter<"Monitor"> | string
+  createdAt?: Prisma.DateTimeNullableFilter<"Monitor"> | Date | string | null
   updatedat?: Prisma.DateTimeNullableFilter<"Monitor"> | Date | string | null
 }
 
@@ -575,7 +575,7 @@ export type MonitorCreateWithoutChecksInput = {
   url: string
   interval?: number
   status?: $Enums.Status
-  createdat?: Date | string | null
+  createdAt?: Date | string | null
   updatedat?: Date | string | null
   user: Prisma.UserCreateNestedOneWithoutMonitorInput
 }
@@ -586,8 +586,8 @@ export type MonitorUncheckedCreateWithoutChecksInput = {
   url: string
   interval?: number
   status?: $Enums.Status
-  userid: string
-  createdat?: Date | string | null
+  userId: string
+  createdAt?: Date | string | null
   updatedat?: Date | string | null
 }
 
@@ -613,7 +613,7 @@ export type MonitorUpdateWithoutChecksInput = {
   url?: Prisma.StringFieldUpdateOperationsInput | string
   interval?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumStatusFieldUpdateOperationsInput | $Enums.Status
-  createdat?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updatedat?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   user?: Prisma.UserUpdateOneRequiredWithoutMonitorNestedInput
 }
@@ -624,8 +624,8 @@ export type MonitorUncheckedUpdateWithoutChecksInput = {
   url?: Prisma.StringFieldUpdateOperationsInput | string
   interval?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumStatusFieldUpdateOperationsInput | $Enums.Status
-  userid?: Prisma.StringFieldUpdateOperationsInput | string
-  createdat?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updatedat?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
@@ -635,7 +635,7 @@ export type MonitorCreateManyUserInput = {
   url: string
   interval?: number
   status?: $Enums.Status
-  createdat?: Date | string | null
+  createdAt?: Date | string | null
   updatedat?: Date | string | null
 }
 
@@ -645,7 +645,7 @@ export type MonitorUpdateWithoutUserInput = {
   url?: Prisma.StringFieldUpdateOperationsInput | string
   interval?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumStatusFieldUpdateOperationsInput | $Enums.Status
-  createdat?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updatedat?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   checks?: Prisma.CheckLogUpdateManyWithoutMonitorNestedInput
 }
@@ -656,7 +656,7 @@ export type MonitorUncheckedUpdateWithoutUserInput = {
   url?: Prisma.StringFieldUpdateOperationsInput | string
   interval?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumStatusFieldUpdateOperationsInput | $Enums.Status
-  createdat?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updatedat?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   checks?: Prisma.CheckLogUncheckedUpdateManyWithoutMonitorNestedInput
 }
@@ -667,7 +667,7 @@ export type MonitorUncheckedUpdateManyWithoutUserInput = {
   url?: Prisma.StringFieldUpdateOperationsInput | string
   interval?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumStatusFieldUpdateOperationsInput | $Enums.Status
-  createdat?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updatedat?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
@@ -708,8 +708,8 @@ export type MonitorSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   url?: boolean
   interval?: boolean
   status?: boolean
-  userid?: boolean
-  createdat?: boolean
+  userId?: boolean
+  createdAt?: boolean
   updatedat?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   checks?: boolean | Prisma.Monitor$checksArgs<ExtArgs>
@@ -722,8 +722,8 @@ export type MonitorSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   url?: boolean
   interval?: boolean
   status?: boolean
-  userid?: boolean
-  createdat?: boolean
+  userId?: boolean
+  createdAt?: boolean
   updatedat?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["monitor"]>
@@ -734,8 +734,8 @@ export type MonitorSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   url?: boolean
   interval?: boolean
   status?: boolean
-  userid?: boolean
-  createdat?: boolean
+  userId?: boolean
+  createdAt?: boolean
   updatedat?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["monitor"]>
@@ -746,12 +746,12 @@ export type MonitorSelectScalar = {
   url?: boolean
   interval?: boolean
   status?: boolean
-  userid?: boolean
-  createdat?: boolean
+  userId?: boolean
+  createdAt?: boolean
   updatedat?: boolean
 }
 
-export type MonitorOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "url" | "interval" | "status" | "userid" | "createdat" | "updatedat", ExtArgs["result"]["monitor"]>
+export type MonitorOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "url" | "interval" | "status" | "userId" | "createdAt" | "updatedat", ExtArgs["result"]["monitor"]>
 export type MonitorInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   checks?: boolean | Prisma.Monitor$checksArgs<ExtArgs>
@@ -776,8 +776,8 @@ export type $MonitorPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     url: string
     interval: number
     status: $Enums.Status
-    userid: string
-    createdat: Date | null
+    userId: string
+    createdAt: Date | null
     updatedat: Date | null
   }, ExtArgs["result"]["monitor"]>
   composites: {}
@@ -1209,8 +1209,8 @@ export interface MonitorFieldRefs {
   readonly url: Prisma.FieldRef<"Monitor", 'String'>
   readonly interval: Prisma.FieldRef<"Monitor", 'Int'>
   readonly status: Prisma.FieldRef<"Monitor", 'Status'>
-  readonly userid: Prisma.FieldRef<"Monitor", 'String'>
-  readonly createdat: Prisma.FieldRef<"Monitor", 'DateTime'>
+  readonly userId: Prisma.FieldRef<"Monitor", 'String'>
+  readonly createdAt: Prisma.FieldRef<"Monitor", 'DateTime'>
   readonly updatedat: Prisma.FieldRef<"Monitor", 'DateTime'>
 }
     
