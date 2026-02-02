@@ -17,7 +17,7 @@ import { APP_GUARD } from '@nestjs/core';
     ThrottlerModule.forRoot([
       {
         ttl: 60000, // Время жизни в миллисекундах (1 минута)
-        limit: 20, // Максимум 20 запросов за ttl
+        limit: 1000000, // Максимум 20 запросов за ttl
       },
     ]),
     PrismaModule,

@@ -183,13 +183,11 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$re
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$shared$2f$ui$2f$button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/shared/ui/button.tsx [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$entities$2f$monitor$2f$lib$2f$export$2d$to$2d$pdf$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/entities/monitor/lib/export-to-pdf.ts [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$shared$2f$lib$2f$utils$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/shared/lib/utils.ts [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$shared$2f$api$2f$base$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/shared/api/base.ts [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/sonner/dist/index.mjs [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$shared$2f$api$2f$fetch$2d$with$2d$refresh$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/shared/api/fetch-with-refresh.ts [app-client] (ecmascript)");
 ;
 var _s = __turbopack_context__.k.signature();
 'use client';
-;
 ;
 ;
 ;
@@ -246,24 +244,33 @@ function MonitorDetailsClient({ id }) {
             status: c.status
         }));
     const BASE_URL = ("TURBOPACK compile-time value", "http://localhost:5000");
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
+        "MonitorDetailsClient.useEffect": ()=>{
+            console.log('DATA', data);
+        }
+    }["MonitorDetailsClient.useEffect"], [
+        data
+    ]);
     const fetchMonitorData = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useCallback"])({
         "MonitorDetailsClient.useCallback[fetchMonitorData]": async (selectedPeriod, isInitial = false)=>{
             isInitial ? setIsLoading(true) : setIsSwitching(true);
             try {
-                const res = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$shared$2f$api$2f$base$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["api"].get(`/monitors/${id}`, {
+                const res = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$shared$2f$api$2f$fetch$2d$with$2d$refresh$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["fetchWithRefresh"])(`/monitors/${id}`, {
                     params: {
                         period: selectedPeriod
                     }
                 });
                 setData(res.data);
+            } catch (e) {
+                console.error(e);
+                __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toast"].error('Ошибка загрузки данных монитора');
             } finally{
                 setIsLoading(false);
                 setIsSwitching(false);
             }
         }
     }["MonitorDetailsClient.useCallback[fetchMonitorData]"], [
-        id,
-        BASE_URL
+        id
     ]);
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
         "MonitorDetailsClient.useEffect": ()=>{
@@ -281,7 +288,7 @@ function MonitorDetailsClient({ id }) {
                     className: "h-8 w-8 animate-spin text-blue-500"
                 }, void 0, false, {
                     fileName: "[project]/app/monitor/[id]/MonitorDetails.client.tsx",
-                    lineNumber: 108,
+                    lineNumber: 116,
                     columnNumber: 5
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -289,13 +296,13 @@ function MonitorDetailsClient({ id }) {
                     children: "Анализируем данные мониторинга..."
                 }, void 0, false, {
                     fileName: "[project]/app/monitor/[id]/MonitorDetails.client.tsx",
-                    lineNumber: 109,
+                    lineNumber: 117,
                     columnNumber: 5
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/app/monitor/[id]/MonitorDetails.client.tsx",
-            lineNumber: 107,
+            lineNumber: 115,
             columnNumber: 4
         }, this);
     }
@@ -304,7 +311,7 @@ function MonitorDetailsClient({ id }) {
         children: "Ошибка: данные не найдены"
     }, void 0, false, {
         fileName: "[project]/app/monitor/[id]/MonitorDetails.client.tsx",
-        lineNumber: 117,
+        lineNumber: 125,
         columnNumber: 10
     }, this);
     const handleExportCSV = async ()=>{
@@ -354,14 +361,14 @@ function MonitorDetailsClient({ id }) {
                             className: "transition-transform group-hover:-translate-x-1"
                         }, void 0, false, {
                             fileName: "[project]/app/monitor/[id]/MonitorDetails.client.tsx",
-                            lineNumber: 154,
+                            lineNumber: 162,
                             columnNumber: 6
                         }, this),
                         "Назад к дашборду"
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/monitor/[id]/MonitorDetails.client.tsx",
-                    lineNumber: 150,
+                    lineNumber: 158,
                     columnNumber: 5
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -374,7 +381,7 @@ function MonitorDetailsClient({ id }) {
                                     children: data.name
                                 }, void 0, false, {
                                     fileName: "[project]/app/monitor/[id]/MonitorDetails.client.tsx",
-                                    lineNumber: 164,
+                                    lineNumber: 172,
                                     columnNumber: 7
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -382,13 +389,13 @@ function MonitorDetailsClient({ id }) {
                                     children: data.url
                                 }, void 0, false, {
                                     fileName: "[project]/app/monitor/[id]/MonitorDetails.client.tsx",
-                                    lineNumber: 167,
+                                    lineNumber: 175,
                                     columnNumber: 7
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/monitor/[id]/MonitorDetails.client.tsx",
-                            lineNumber: 163,
+                            lineNumber: 171,
                             columnNumber: 6
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -404,14 +411,14 @@ function MonitorDetailsClient({ id }) {
                                             className: "mr-2"
                                         }, void 0, false, {
                                             fileName: "[project]/app/monitor/[id]/MonitorDetails.client.tsx",
-                                            lineNumber: 178,
+                                            lineNumber: 186,
                                             columnNumber: 8
                                         }, this),
                                         " CSV"
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/monitor/[id]/MonitorDetails.client.tsx",
-                                    lineNumber: 173,
+                                    lineNumber: 181,
                                     columnNumber: 7
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$shared$2f$ui$2f$button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
@@ -424,14 +431,14 @@ function MonitorDetailsClient({ id }) {
                                             className: "mr-2"
                                         }, void 0, false, {
                                             fileName: "[project]/app/monitor/[id]/MonitorDetails.client.tsx",
-                                            lineNumber: 185,
+                                            lineNumber: 193,
                                             columnNumber: 8
                                         }, this),
                                         " PDF"
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/monitor/[id]/MonitorDetails.client.tsx",
-                                    lineNumber: 180,
+                                    lineNumber: 188,
                                     columnNumber: 7
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -441,26 +448,26 @@ function MonitorDetailsClient({ id }) {
                                             className: (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$shared$2f$lib$2f$utils$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["cn"])('h-2.5 w-2.5 rounded-full animate-pulse', data.status === 'UP' ? 'bg-green-600' : 'bg-red-600')
                                         }, void 0, false, {
                                             fileName: "[project]/app/monitor/[id]/MonitorDetails.client.tsx",
-                                            lineNumber: 196,
+                                            lineNumber: 204,
                                             columnNumber: 8
                                         }, this),
                                         data.status
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/monitor/[id]/MonitorDetails.client.tsx",
-                                    lineNumber: 188,
+                                    lineNumber: 196,
                                     columnNumber: 7
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/monitor/[id]/MonitorDetails.client.tsx",
-                            lineNumber: 172,
+                            lineNumber: 180,
                             columnNumber: 6
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/monitor/[id]/MonitorDetails.client.tsx",
-                    lineNumber: 162,
+                    lineNumber: 170,
                     columnNumber: 5
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -499,12 +506,12 @@ function MonitorDetailsClient({ id }) {
                                         size: 28
                                     }, void 0, false, {
                                         fileName: "[project]/app/monitor/[id]/MonitorDetails.client.tsx",
-                                        lineNumber: 238,
+                                        lineNumber: 246,
                                         columnNumber: 9
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/app/monitor/[id]/MonitorDetails.client.tsx",
-                                    lineNumber: 237,
+                                    lineNumber: 245,
                                     columnNumber: 8
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -514,7 +521,7 @@ function MonitorDetailsClient({ id }) {
                                             children: stat.label
                                         }, void 0, false, {
                                             fileName: "[project]/app/monitor/[id]/MonitorDetails.client.tsx",
-                                            lineNumber: 241,
+                                            lineNumber: 249,
                                             columnNumber: 9
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -522,24 +529,24 @@ function MonitorDetailsClient({ id }) {
                                             children: stat.val
                                         }, void 0, false, {
                                             fileName: "[project]/app/monitor/[id]/MonitorDetails.client.tsx",
-                                            lineNumber: 244,
+                                            lineNumber: 252,
                                             columnNumber: 9
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/monitor/[id]/MonitorDetails.client.tsx",
-                                    lineNumber: 240,
+                                    lineNumber: 248,
                                     columnNumber: 8
                                 }, this)
                             ]
                         }, i, true, {
                             fileName: "[project]/app/monitor/[id]/MonitorDetails.client.tsx",
-                            lineNumber: 232,
+                            lineNumber: 240,
                             columnNumber: 7
                         }, this))
                 }, void 0, false, {
                     fileName: "[project]/app/monitor/[id]/MonitorDetails.client.tsx",
-                    lineNumber: 208,
+                    lineNumber: 216,
                     columnNumber: 5
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -555,14 +562,14 @@ function MonitorDetailsClient({ id }) {
                                             className: "text-blue-500"
                                         }, void 0, false, {
                                             fileName: "[project]/app/monitor/[id]/MonitorDetails.client.tsx",
-                                            lineNumber: 256,
+                                            lineNumber: 264,
                                             columnNumber: 8
                                         }, this),
                                         " История задержки"
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/monitor/[id]/MonitorDetails.client.tsx",
-                                    lineNumber: 255,
+                                    lineNumber: 263,
                                     columnNumber: 7
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -574,18 +581,18 @@ function MonitorDetailsClient({ id }) {
                                             children: p.label
                                         }, p.value, false, {
                                             fileName: "[project]/app/monitor/[id]/MonitorDetails.client.tsx",
-                                            lineNumber: 262,
+                                            lineNumber: 270,
                                             columnNumber: 9
                                         }, this))
                                 }, void 0, false, {
                                     fileName: "[project]/app/monitor/[id]/MonitorDetails.client.tsx",
-                                    lineNumber: 260,
+                                    lineNumber: 268,
                                     columnNumber: 7
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/monitor/[id]/MonitorDetails.client.tsx",
-                            lineNumber: 254,
+                            lineNumber: 262,
                             columnNumber: 6
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -610,7 +617,7 @@ function MonitorDetailsClient({ id }) {
                                                         stopOpacity: 0.3
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/monitor/[id]/MonitorDetails.client.tsx",
-                                                        lineNumber: 289,
+                                                        lineNumber: 297,
                                                         columnNumber: 11
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("stop", {
@@ -619,18 +626,18 @@ function MonitorDetailsClient({ id }) {
                                                         stopOpacity: 0
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/monitor/[id]/MonitorDetails.client.tsx",
-                                                        lineNumber: 290,
+                                                        lineNumber: 298,
                                                         columnNumber: 11
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/app/monitor/[id]/MonitorDetails.client.tsx",
-                                                lineNumber: 288,
+                                                lineNumber: 296,
                                                 columnNumber: 10
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "[project]/app/monitor/[id]/MonitorDetails.client.tsx",
-                                            lineNumber: 287,
+                                            lineNumber: 295,
                                             columnNumber: 9
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$recharts$2f$es6$2f$cartesian$2f$CartesianGrid$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CartesianGrid"], {
@@ -640,7 +647,7 @@ function MonitorDetailsClient({ id }) {
                                             opacity: 0.1
                                         }, void 0, false, {
                                             fileName: "[project]/app/monitor/[id]/MonitorDetails.client.tsx",
-                                            lineNumber: 293,
+                                            lineNumber: 301,
                                             columnNumber: 9
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$recharts$2f$es6$2f$cartesian$2f$XAxis$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["XAxis"], {
@@ -651,7 +658,7 @@ function MonitorDetailsClient({ id }) {
                                             axisLine: false
                                         }, void 0, false, {
                                             fileName: "[project]/app/monitor/[id]/MonitorDetails.client.tsx",
-                                            lineNumber: 299,
+                                            lineNumber: 307,
                                             columnNumber: 9
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$recharts$2f$es6$2f$cartesian$2f$YAxis$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["YAxis"], {
@@ -662,7 +669,7 @@ function MonitorDetailsClient({ id }) {
                                             axisLine: false
                                         }, void 0, false, {
                                             fileName: "[project]/app/monitor/[id]/MonitorDetails.client.tsx",
-                                            lineNumber: 306,
+                                            lineNumber: 314,
                                             columnNumber: 9
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$recharts$2f$es6$2f$component$2f$Tooltip$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Tooltip"], {
@@ -681,7 +688,7 @@ function MonitorDetailsClient({ id }) {
                                             }
                                         }, void 0, false, {
                                             fileName: "[project]/app/monitor/[id]/MonitorDetails.client.tsx",
-                                            lineNumber: 313,
+                                            lineNumber: 321,
                                             columnNumber: 9
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$recharts$2f$es6$2f$cartesian$2f$Area$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Area"], {
@@ -693,29 +700,29 @@ function MonitorDetailsClient({ id }) {
                                             animationDuration: 1000
                                         }, void 0, false, {
                                             fileName: "[project]/app/monitor/[id]/MonitorDetails.client.tsx",
-                                            lineNumber: 323,
+                                            lineNumber: 331,
                                             columnNumber: 9
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/monitor/[id]/MonitorDetails.client.tsx",
-                                    lineNumber: 286,
+                                    lineNumber: 294,
                                     columnNumber: 8
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/app/monitor/[id]/MonitorDetails.client.tsx",
-                                lineNumber: 285,
+                                lineNumber: 293,
                                 columnNumber: 7
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/app/monitor/[id]/MonitorDetails.client.tsx",
-                            lineNumber: 279,
+                            lineNumber: 287,
                             columnNumber: 6
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/monitor/[id]/MonitorDetails.client.tsx",
-                    lineNumber: 253,
+                    lineNumber: 261,
                     columnNumber: 5
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -730,19 +737,19 @@ function MonitorDetailsClient({ id }) {
                                         className: "text-amber-500"
                                     }, void 0, false, {
                                         fileName: "[project]/app/monitor/[id]/MonitorDetails.client.tsx",
-                                        lineNumber: 340,
+                                        lineNumber: 348,
                                         columnNumber: 8
                                     }, this),
                                     " Журнал инцидентов за период"
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/monitor/[id]/MonitorDetails.client.tsx",
-                                lineNumber: 339,
+                                lineNumber: 347,
                                 columnNumber: 7
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/app/monitor/[id]/MonitorDetails.client.tsx",
-                            lineNumber: 338,
+                            lineNumber: 346,
                             columnNumber: 6
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -759,7 +766,7 @@ function MonitorDetailsClient({ id }) {
                                                     children: "Дата и время"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/monitor/[id]/MonitorDetails.client.tsx",
-                                                    lineNumber: 349,
+                                                    lineNumber: 357,
                                                     columnNumber: 10
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -767,7 +774,7 @@ function MonitorDetailsClient({ id }) {
                                                     children: "Статус"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/monitor/[id]/MonitorDetails.client.tsx",
-                                                    lineNumber: 350,
+                                                    lineNumber: 358,
                                                     columnNumber: 10
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -775,7 +782,7 @@ function MonitorDetailsClient({ id }) {
                                                     children: "Код"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/monitor/[id]/MonitorDetails.client.tsx",
-                                                    lineNumber: 351,
+                                                    lineNumber: 359,
                                                     columnNumber: 10
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -783,18 +790,18 @@ function MonitorDetailsClient({ id }) {
                                                     children: "Задержка"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/monitor/[id]/MonitorDetails.client.tsx",
-                                                    lineNumber: 352,
+                                                    lineNumber: 360,
                                                     columnNumber: 10
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/monitor/[id]/MonitorDetails.client.tsx",
-                                            lineNumber: 348,
+                                            lineNumber: 356,
                                             columnNumber: 9
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/app/monitor/[id]/MonitorDetails.client.tsx",
-                                        lineNumber: 347,
+                                        lineNumber: 355,
                                         columnNumber: 8
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("tbody", {
@@ -806,12 +813,12 @@ function MonitorDetailsClient({ id }) {
                                                 children: "🎉 За выбранный период сбоев не обнаружено"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/monitor/[id]/MonitorDetails.client.tsx",
-                                                lineNumber: 358,
+                                                lineNumber: 366,
                                                 columnNumber: 11
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "[project]/app/monitor/[id]/MonitorDetails.client.tsx",
-                                            lineNumber: 357,
+                                            lineNumber: 365,
                                             columnNumber: 10
                                         }, this) : checks.filter((c)=>c.status === 'DOWN').reverse().map((incident)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("tr", {
                                                 className: "transition-colors hover:bg-slate-50 dark:hover:bg-slate-800/30",
@@ -821,7 +828,7 @@ function MonitorDetailsClient({ id }) {
                                                         children: new Date(incident.createdAt).toLocaleString()
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/monitor/[id]/MonitorDetails.client.tsx",
-                                                        lineNumber: 374,
+                                                        lineNumber: 382,
                                                         columnNumber: 13
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -831,12 +838,12 @@ function MonitorDetailsClient({ id }) {
                                                             children: "DOWN"
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/monitor/[id]/MonitorDetails.client.tsx",
-                                                            lineNumber: 378,
+                                                            lineNumber: 386,
                                                             columnNumber: 14
                                                         }, this)
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/monitor/[id]/MonitorDetails.client.tsx",
-                                                        lineNumber: 377,
+                                                        lineNumber: 385,
                                                         columnNumber: 13
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -844,7 +851,7 @@ function MonitorDetailsClient({ id }) {
                                                         children: incident.statusCode || 'Err'
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/monitor/[id]/MonitorDetails.client.tsx",
-                                                        lineNumber: 382,
+                                                        lineNumber: 390,
                                                         columnNumber: 13
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -855,50 +862,50 @@ function MonitorDetailsClient({ id }) {
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/app/monitor/[id]/MonitorDetails.client.tsx",
-                                                        lineNumber: 385,
+                                                        lineNumber: 393,
                                                         columnNumber: 13
                                                     }, this)
                                                 ]
                                             }, incident.id, true, {
                                                 fileName: "[project]/app/monitor/[id]/MonitorDetails.client.tsx",
-                                                lineNumber: 370,
+                                                lineNumber: 378,
                                                 columnNumber: 12
                                             }, this))
                                     }, void 0, false, {
                                         fileName: "[project]/app/monitor/[id]/MonitorDetails.client.tsx",
-                                        lineNumber: 355,
+                                        lineNumber: 363,
                                         columnNumber: 8
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/monitor/[id]/MonitorDetails.client.tsx",
-                                lineNumber: 346,
+                                lineNumber: 354,
                                 columnNumber: 7
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/app/monitor/[id]/MonitorDetails.client.tsx",
-                            lineNumber: 345,
+                            lineNumber: 353,
                             columnNumber: 6
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/monitor/[id]/MonitorDetails.client.tsx",
-                    lineNumber: 337,
+                    lineNumber: 345,
                     columnNumber: 5
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/app/monitor/[id]/MonitorDetails.client.tsx",
-            lineNumber: 144,
+            lineNumber: 152,
             columnNumber: 4
         }, this)
     }, void 0, false, {
         fileName: "[project]/app/monitor/[id]/MonitorDetails.client.tsx",
-        lineNumber: 143,
+        lineNumber: 151,
         columnNumber: 3
     }, this);
 }
-_s(MonitorDetailsClient, "R7deXw2f453roCVzpi9v2+YkfZw=");
+_s(MonitorDetailsClient, "p/QAmJI5oPe2okqeIOv0CrCVdrc=");
 _c = MonitorDetailsClient;
 var _c;
 __turbopack_context__.k.register(_c, "MonitorDetailsClient");

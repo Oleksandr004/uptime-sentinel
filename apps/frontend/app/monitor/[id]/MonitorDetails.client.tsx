@@ -80,21 +80,29 @@ export default function MonitorDetailsClient({ id }: { id: string }) {
 
 	const BASE_URL = process.env.NEXT_PUBLIC_API_URL!
 
+	useEffect(() => {
+		console.log('DATA', data)
+	}, [data])
+
 	const fetchMonitorData = useCallback(
 		async (selectedPeriod: Period, isInitial = false) => {
 			isInitial ? setIsLoading(true) : setIsSwitching(true)
 
 			try {
-				const res = fetchWithRefresh(`/monitors/${id}`, {
+				const res = await fetchWithRefresh(`/monitors/${id}`, {
 					params: { period: selectedPeriod },
 				})
-				setData(res)
+
+				setData(res.data)
+			} catch (e) {
+				console.error(e)
+				toast.error('Ошибка загрузки данных монитора')
 			} finally {
 				setIsLoading(false)
 				setIsSwitching(false)
 			}
 		},
-		[id, BASE_URL]
+		[id]
 	)
 
 	useEffect(() => {

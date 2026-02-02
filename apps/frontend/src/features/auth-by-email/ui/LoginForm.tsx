@@ -138,6 +138,7 @@ export const LoginForm = () => {
 			router.push('/')
 			router.refresh()
 		} catch (err: any) {
+			toast.error(err.response?.data?.message || 'Неверный email или пароль')
 			// setServerError(err.response?.data?.message || 'Неверный email или пароль')
 		} finally {
 			setLoading(false)
