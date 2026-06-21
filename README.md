@@ -1,86 +1,95 @@
-# 🛡️ Uptime Sentinel - Система мониторинга доступности
+# 🛡️ Uptime Sentinel - Availability monitoring system
 
-**Uptime Sentinel** (SENTINEL) - это полнофункциональная система мониторинга доступности веб-ресурсов в реальном времени с современным веб-интерфейсом, уведомлениями в Telegram и детальной аналитикой.
+**Uptime Sentinel** (SENTINEL) - It is a fully-featured system for monitoring the availability of web resources in real time, featuring a modern web interface, Telegram notifications and detailed analytics.
 
 ---
 
-## 📋 Содержание
+## 📋 Contents
 
-- [Описание проекта](#-описание-проекта)
-- [Основные возможности](#-основные-возможности)
-- [Архитектура](#-архитектура)
-- [Технологический стек](#-технологический-стек)
-- [Структура проекта](#-структура-проекта)
+---
+
+- [Project description](#-project-description)
+- [Key features](#-key-features)
+- [Architecture](#architecture)
+- [Technology stack](#-technology-stack)
+- [Project structure](#-project-structure)
 - [Backend](#-backend)
 - [Frontend](#-frontend)
-- [DevOps & Инфраструктура](#-devops--инфраструктура)
-- [База данных](#-база-данных)
-- [Установка и запуск](#-установка-и-запуск)
-- [API Документация](#-api-документация)
-- [Тестирование](#-тестирование)
-- [CI/CD](#-cicd)
+- [DevOps & Infrastructure](#-devops--infrastructure)
+- [Database](#-Database)
+- [Installation and setup](#-installation-and-setup)
+- [API Documentation](#-api-documentation)
+- [Testing](#-testing)
 
 ---
 
-## 🎯 Описание проекта
+## 🎯 Project description
 
-Uptime Sentinel - это современная платформа для мониторинга доступности веб-сайтов, API и сервисов. Система позволяет отслеживать статус ресурсов, измерять время отклика, получать уведомления о проблемах и анализировать историю работы сервисов.
+Uptime Sentinel is a state-of-the-art platform for monitoring the availability of websites, APIs and services. The system enables you to track the status of resources, measure response times, receive notifications of issues and analyse the performance history of services.
 
-### Ключевые преимущества:
+### Key benefits:
 
-- ⚡ **Мониторинг в реальном времени** через WebSocket соединения
-- 📊 **Детальная аналитика** с графиками и статистикой
-- 📱 **Уведомления в Telegram** при сбоях и восстановлениях
-- 🔐 **Безопасная аутентификация** с JWT токенами и refresh токенами
-- 🎨 **Современный UI** с поддержкой темной темы
-- 📦 **Экспорт данных** в CSV и PDF форматы
-- 🚀 **Масштабируемая архитектура** на базе BullMQ и Redis
+⚡ **Real-time monitoring** via WebSocket connections
 
----
-
-## ✨ Основные возможности
-
-### Для пользователей:
-
-1. **Управление мониторами**
-   - Создание, просмотр и удаление мониторов
-   - Настраиваемый интервал проверки (по умолчанию 60 секунд)
-   - Группировка мониторов по статусу
-
-2. **Мониторинг в реальном времени**
-   - Обновление статуса без перезагрузки страницы (WebSocket)
-   - Визуальные индикаторы состояния (UP/DOWN/PENDING)
-   - Отображение времени отклика в миллисекундах
-
-3. **Детальная аналитика**
-   - Графики времени отклика за 24 часа, 7 дней или 30 дней
-   - Расчет доступности (uptime percentage)
-   - Средняя задержка ответа
-   - Журнал инцидентов (история сбоев)
-
-4. **Экспорт данных**
-   - Экспорт логов проверок в CSV
-   - Генерация отчетов в PDF
-
-5. **Уведомления**
-   - Автоматические уведомления в Telegram при сбоях
-   - Уведомления о восстановлении сервиса
-
-6. **Поиск и фильтрация**
-   - Поиск мониторов по названию или URL
-   - Фильтрация по статусу (Все/Online/Offline)
-
-7. **Интерфейс**
-   - Адаптивный дизайн для всех устройств
-   - Темная и светлая темы
-   - Плавные анимации и переходы
-   - Интуитивно понятная навигация
+- 📊 **Detailed analytics** with charts and statistics
+- 📱 **Telegram notifications** for outages and recoveries
+- 🔐 **Secure authentication** with JWT tokens and refresh tokens
+- 🎨 **Modern UI** with dark theme support
+- 📦 **Data export** to CSV and PDF formats
+- 🚀 **Scalable architecture** based on BullMQ and Redis
 
 ---
 
-## 🏗️ Архитектура
+## ✨ Key features
 
-Проект построен по **микросервисной архитектуре** с разделением на frontend и backend приложения.
+### For users:
+
+1. **Monitor Management**
+
+- Creating, viewing and deleting monitors
+- Customisable check interval (default 60 seconds)
+- Grouping monitors by status
+
+2. **Real-time monitoring**
+
+- Status updates without reloading the page (WebSocket)
+- Visual status indicators (UP/DOWN/PENDING)
+- Response time displayed in milliseconds
+
+3. **Detailed analytics**
+
+- Response time charts for 24 hours, 7 days or 30 days
+- Uptime percentage calculation
+- Average response delay
+- Incident log (outage history)
+
+4. **Data export**
+
+- Export check logs to CSV
+- Generate reports in PDF
+
+5. **Notifications**
+
+- Automatic notifications via Telegram in the event of outages
+- Service restoration notifications
+
+6. **Search and filtering**
+
+- Search for monitors by name or URL
+- Filter by status (All/Online/Offline)
+
+7. **User interface**
+
+- Responsive design for all devices
+- Dark and light themes
+- Smooth animations and transitions
+- Intuitive navigation
+
+---
+
+## Architecture
+
+The project is built using a **microservices architecture**, with a distinction between front-end and back-end applications.
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -127,137 +136,141 @@ Uptime Sentinel - это современная платформа для мон
     └───────────┘          └───────────┘
 ```
 
-### Компоненты архитектуры:
+### Architectural components:
 
 1. **Frontend (Next.js 16)**
-   - Client-side приложение с Server-Side Rendering
-   - WebSocket клиент для реального времени
-   - State management через React hooks
-   - API клиент с автоматическим refresh токенов
+
+- Client-side application with server-side rendering
+- WebSocket client for real-time communication
+- State management via React hooks
+- API client with automatic token refresh
 
 2. **Backend (NestJS 11)**
-   - RESTful API
-   - WebSocket Gateway для real-time обновлений
-   - JWT аутентификация с refresh токенами
-   - Очередь задач на BullMQ для периодических проверок
+
+- RESTful API
+- WebSocket gateway for real-time updates
+- JWT authentication with refresh tokens
+- Task queue on BullMQ for periodic checks
 
 3. **Queue System (BullMQ + Redis)**
-   - Повторяющиеся задачи для проверки мониторов
-   - Обработка задач асинхронно в фоновых воркерах
-   - Отслеживание статуса выполнения
+
+- Recurring tasks for monitoring checks
+- Asynchronous task processing in background workers
+- Execution status tracking
 
 4. **Database (PostgreSQL + Prisma)**
-   - Реляционная БД для хранения данных
-   - ORM Prisma для типобезопасных запросов
-   - Миграции схемы
+
+- Relational database for data storage
+- Prisma ORM for type-safe queries
+- Schema migrations
 
 ---
 
-## 🛠️ Технологический стек
+## 🛠️ Technology stack
 
 ### Frontend
 
-| Технология | Версия | Назначение |
-|-----------|--------|------------|
-| **Next.js** | 16.1.1 | React фреймворк с SSR |
-| **React** | 19.2.3 | UI библиотека |
-| **TypeScript** | ^5 | Типизация |
-| **Tailwind CSS** | ^4 | CSS фреймворк |
-| **Framer Motion** | ^12.26.1 | Анимации |
-| **Recharts** | ^3.6.0 | Графики и диаграммы |
-| **React Hook Form** | ^7.71.0 | Управление формами |
-| **Zod** | ^4.3.5 | Валидация схем |
-| **Socket.io-client** | ^4.8.3 | WebSocket клиент |
-| **Axios** | ^1.13.2 | HTTP клиент |
-| **jsPDF** | ^4.0.0 | Генерация PDF |
-| **Radix UI** | ^1.x | UI компоненты |
-| **Lucide React** | ^0.562.0 | Иконки |
-| **Vitest** | ^4.0.17 | Unit тестирование |
-| **Cypress** | ^15.8.2 | E2E тестирование |
+| Technology           | Version  | Purpose                  |
+| -------------------- | -------- | ------------------------ |
+| **Next.js**          | 16.1.1   | React framework with SSR |
+| **React**            | 19.2.3   | UI library               |
+| **TypeScript**       | ^5       | Typing                   |
+| **Tailwind CSS**     | ^4       | CSS framework            |
+| **Framer Motion**    | ^12.26.1 | Animation                |
+| **Recharts**         | ^3.6.0   | Graphs and charts        |
+| **React Hook Form**  | ^7.71.0  | Form Management          |
+| **Zod**              | ^4.3.5   | Schema Validation        |
+| **Socket.io-client** | ^4.8.3   | WebSocket client         |
+| **Axios**            | ^1.13.2  | HTTP client              |
+| **jsPDF**            | ^4.0.0   | Generate PDF             |
+| **Radix UI**         | ^1.x     | UI components            |
+| **Lucide React**     | ^0.562.0 | Icons                    |
+| **Vitest**           | ^4.0.17  | Unit testing             |
+| **Cypress**          | ^15.8.2  | E2E testing              |
 
 ### Backend
 
-| Технология | Версия | Назначение |
-|-----------|--------|------------|
-| **NestJS** | ^11.1.0 | Node.js фреймворк |
-| **TypeScript** | ^5.7.3 | Типизация |
-| **Prisma** | ^7.2.0 | ORM для PostgreSQL |
-| **PostgreSQL** | 15-alpine | Реляционная БД |
-| **Redis** | alpine | Кеш и очередь задач |
-| **BullMQ** | ^5.66.4 | Очередь задач |
-| **Socket.io** | ^4.8.3 | WebSocket сервер |
-| **Passport JWT** | ^4.0.1 | JWT аутентификация |
-| **bcrypt** | ^6.0.0 | Хеширование паролей |
-| **Telegraf** | ^4.16.3 | Telegram Bot API |
-| **Swagger** | ^11.2.4 | API документация |
-| **Jest** | ^30.0.0 | Тестирование |
-| **Axios** | ^1.13.2 | HTTP клиент для проверок |
+| Technology       | Version   | Purpose              |
+| ---------------- | --------- | -------------------- |
+| **NestJS**       | ^11.1.0   | Node.js framework    |
+| **TypeScript**   | ^5.7.3    | Typing               |
+| **Prisma**       | ^7.2.0    | ORM for PostgreSQL   |
+| **PostgreSQL**   | 15-alpine | Relational database  |
+| **Redis**        | alpine    | Cache and task queue |
+| **BullMQ**       | ^5.66.4   | Sequence of tasks    |
+| **Socket.io**    | ^4.8.3    | WebSocket server     |
+| **Passport JWT** | ^4.0.1    | JWT auntification    |
+| **bcrypt**       | ^6.0.0    | Password hashing     |
+| **Telegraf**     | ^4.16.3   | Telegram Bot API     |
+| **Swagger**      | ^11.2.4   | API docs             |
+| **Jest**         | ^30.0.0   | Testing              |
+| **Axios**        | ^1.13.2   | HTTP audit client    |
 
 ### DevOps
 
-| Технология | Назначение |
-|-----------|------------|
-| **Docker** | Контейнеризация приложений |
-| **Docker Compose** | Оркестрация сервисов |
-| **GitHub Actions** | CI/CD pipeline |
-| **pnpm** | Менеджер пакетов |
+| Technology         | Purpose                      |
+| ------------------ | ---------------------------- |
+| **Docker**         | Application containerisation |
+| **Docker Compose** | Service orchestration        |
+| **GitHub Actions** | CI/CD pipeline               |
+| **pnpm**           | Package Manager              |
 
 ---
 
-## 📁 Структура проекта
+## 📁 Project structure
 
 ```
 uptime-sentinel/
 ├── apps/
-│   ├── backend/                 # NestJS приложение
-│   │   ├── prisma/              # Prisma схема и миграции
-│   │   │   ├── schema.prisma    # Модели данных
-│   │   │   ├── migrations/      # История миграций
-│   │   │   └── generated/       # Сгенерированный Prisma Client
+│   ├── backend/                 # NestJS application
+│   │   ├── prisma/              # Prisma schema and migrations
+│   │   │   ├── schema.prisma    # Data models
+│   │   │   ├── migrations/      # The History of Migration
+│   │   │   └── generated/       # Generated Prisma Client
 │   │   ├── src/
-│   │   │   ├── auth/            # Модуль аутентификации
+│   │   │   ├── auth/            # Auntification module
 │   │   │   │   ├── auth.controller.ts
 │   │   │   │   ├── auth.service.ts
 │   │   │   │   ├── guards/      # JWT guards
 │   │   │   │   └── dto/         # Data Transfer Objects
-│   │   │   ├── monitor/         # Модуль мониторинга
+│   │   │   ├── monitor/         # Monitoring module
 │   │   │   │   ├── monitor.controller.ts
 │   │   │   │   ├── monitor.service.ts
 │   │   │   │   ├── uptime.processor.ts  # BullMQ worker
 │   │   │   │   └── dto/
 │   │   │   ├── events/          # WebSocket Gateway
 │   │   │   │   └── events.gateway.ts
-│   │   │   ├── notify/          # Telegram уведомления
+│   │   │   ├── notify/          # Telegram notification
 │   │   │   │   └── notify.service.ts
 │   │   │   ├── health/          # Health checks
-│   │   │   ├── common/          # Общие фильтры и утилиты
-│   │   │   ├── app.module.ts    # Корневой модуль
-│   │   │   └── main.ts          # Точка входа
+│   │   │   ├── common/          # General filters and utilities
+│   │   │   ├── app.module.ts    # Root module
+│   │   │   └── main.ts          # Entry point
 │   │   ├── Dockerfile
 │   │   └── package.json
 │   │
-│   └── frontend/                # Next.js приложение
+│   └── frontend/                # Next.js application
 │       ├── app/                 # App Router (Next.js 13+)
-│       │   ├── page.tsx         # Главная страница (Dashboard)
-│       │   ├── login/           # Страница входа
-│       │   ├── register/        # Страница регистрации
-│       │   ├── add/             # Создание монитора
-│       │   ├── monitor/[id]/    # Детали монитора
-│       │   └── providers/       # React Context провайдеры
+│       │   ├── page.tsx         # Home page (Dashboard)
+│       │   ├── login/           # Login page
+│       │   ├── register/        # Register page
+│       │   ├── add/             # Creating a monitor
+│       │   ├── monitor/[id]/    # Monitor specifications
+│       │   └── providers/       # React Context providers
 │       ├── src/
-│       │   ├── entities/        # Бизнес-сущности (FSD)
+│       │   ├── entities/        # Business entities (FSD)
 │       │   │   └── monitor/
-│       │   ├── features/        # Функциональные фичи (FSD)
+│       │   ├── features/        # Functional features (FSD)
 │       │   │   ├── auth-by-email/
 │       │   │   └── monitor/
-│       │   ├── widgets/         # Составные виджеты (FSD)
+│       │   ├── widgets/         # Composite widgets (FSD)
 │       │   │   ├── monitor-list/
 │       │   │   └── stats-overview/
-│       │   └── shared/          # Переиспользуемые компоненты
-│       │       ├── api/         # API клиенты
-│       │       ├── ui/          # UI компоненты
-│       │       └── lib/         # Утилиты
-│       ├── cypress/             # E2E тесты
+│       │   └── shared/          # Reusable components
+│       │       ├── api/         # API clients
+│       │       ├── ui/          # UI components
+│       │       └── lib/         # Utility
+│       ├── cypress/             # E2E tests
 │       ├── Dockerfile
 │       └── package.json
 │
@@ -265,279 +278,305 @@ uptime-sentinel/
 │   └── workflows/
 │       └── main.yml             # CI/CD pipeline
 │
-├── docker-compose.yml           # Оркестрация всех сервисов
-└── README.md                    # Этот файл
+├── docker-compose.yml           # Orchestration of all services
 ```
 
-> **Примечание**: Frontend использует архитектуру **Feature-Sliced Design (FSD)** для организации кода.
+> **Note**: The frontend uses the **Feature-Sliced Design (FSD)** architecture to organise its code.
 
 ---
 
 ## 🎨 Backend
 
-### Модули NestJS
+### NestJS modules
 
 #### 1. **Auth Module** (`src/auth/`)
 
-Модуль аутентификации и авторизации пользователей.
+User authentication and authorisation module.
 
-**Функционал:**
-- Регистрация новых пользователей
-- Вход в систему (email + password)
-- JWT токены (access + refresh)
-- Автоматическое обновление токенов
-- Защита маршрутов через Guards
+**Features:**
 
-**Компоненты:**
+- New user registration
+- Logging in (email + password)
+- JWT tokens (access + refresh)
+- Automatic token renewal
+- Protecting routes using Guards
+- **Components:**
+
 - `auth.controller.ts` - REST endpoints (`/auth/register`, `/auth/login`, `/auth/refresh`)
-- `auth.service.ts` - Бизнес-логика аутентификации
-- `jwt.strategy.ts` - Passport JWT стратегия
-- `jwt-auth.guard.ts` - Guard для защиты маршрутов
-- `dto/auth.dto.ts` - DTO для валидации входных данных
+- `auth.service.ts` - Business logic of authentication
+- `jwt.strategy.ts` - Passport JWT strategy
+- `jwt-auth.guard.ts` - Guard for route protection
+- `dto/auth.dto.ts` - DTO for validating input data
 
-**Особенности:**
-- Хеширование паролей с помощью bcrypt (10 rounds)
-- Access токен: 15 минут
-- Refresh токен: 7 дней
-- Хранение хешированного refresh токена в БД
+**Features:**
+
+- Password hashing using bcrypt (10 rounds)
+- Access token: 15 minutes
+- Refresh token: 7 days
+- Storing the hashed refresh token in the database
 
 #### 2. **Monitor Module** (`src/monitor/`)
 
-Основной модуль для управления мониторами.
+The main module for controlling monitors.
 
-**Функционал:**
-- CRUD операции с мониторами
-- Получение списка мониторов пользователя
-- Детальная информация о мониторе с историей
-- Экспорт данных в CSV
-- Фильтрация по периоду (24h/7d/30d)
+**Functionality:**
+
+- CRUD operations on monitors
+- Retrieving a list of a user’s monitors
+- Detailed monitor information, including history
+- Exporting data to CSV
+- Filtering by time period (24h/7d/30d)
 
 **Endpoints:**
-- `POST /monitors` - Создание монитора
-- `GET /monitors` - Список всех мониторов пользователя
-- `GET /monitors/:id` - Детали монитора
-- `GET /monitors/:id/export-csv` - Экспорт в CSV
-- `DELETE /monitors/:id` - Удаление монитора
 
-**Особенности:**
-- Автоматическое создание задачи в BullMQ при создании монитора
-- Удаление повторяющейся задачи при удалении монитора
-- Изоляция данных по пользователям (userId)
+- `POST /monitors` – Create a monitor
+- `GET /monitors` – List all of the user’s monitors
+- `GET /monitors/:id` – Monitor details
+- `GET /monitors/:id/export-csv` – Export to CSV
+- `DELETE /monitors/:id` – Delete a monitor
+
+**Features:**
+
+- Automatic creation of a task in BullMQ when a monitor is created
+- Deletion of a recurring task when a monitor is deleted
+- Data isolation by user (userId)
 
 #### 3. **Uptime Processor** (`src/monitor/uptime.processor.ts`)
 
-BullMQ Worker для выполнения проверок доступности.
+BullMQ Worker for performing availability checks.
 
-**Логика работы:**
-1. Получение задачи из очереди `uptime-checks`
-2. HTTP запрос к мониторируемому URL (timeout: 1 сек)
-3. Запись результата в `CheckLog`
-4. Обновление статуса монитора (UP/DOWN)
-5. Отправка обновления через WebSocket
-6. Триггер уведомлений (если изменился статус)
+**How it works:**
 
-**Обработка ошибок:**
-- Таймаут запроса
-- HTTP ошибки (4xx, 5xx)
-- Сетевые ошибки
-- Ошибки DNS
+1. Retrieve a task from the `uptime-checks` queue
+2. Send an HTTP request to the monitored URL (timeout: 1 sec)
+3. Log the result in `CheckLog`
+4. Update the monitor’s status (UP/DOWN)
+5. Send the update via WebSocket
+6. Trigger notifications (if the status has changed)
 
-**Уведомления:**
-- При переходе с UP/PENDING на DOWN → Telegram alert
-- При переходе с DOWN на UP → Telegram recovery
+**Error handling:**
+
+- Request timeout
+- HTTP errors (4xx, 5xx)
+- Network errors
+- DNS errors
+
+**Notifications:**
+
+- When status changes from UP/PENDING to DOWN → Telegram alert
+- When status changes from DOWN to UP → Telegram recovery notification.
 
 #### 4. **Events Gateway** (`src/events/events.gateway.ts`)
 
-WebSocket сервер для real-time обновлений.
+A WebSocket server for real-time updates.
 
-**Функционал:**
-- Подключение/отключение клиентов
-- Broadcast обновлений статуса мониторов
-- События: `status_updated:{monitorId}`
+**Features:**
 
-**Использование:**
-Когда Uptime Processor обновляет статус, он вызывает:
+- Connecting/disconnecting clients
+- Broadcasting monitor status updates
+- Events: `status_updated:{monitorId}`
+
+**Usage:**
+When Uptime Processor updates a status, it triggers:
+
 ```typescript
 eventsGateway.sendMonitorUpdate(monitorId, { status, latency })
 ```
 
 #### 5. **Notify Service** (`src/notify/notify.service.ts`)
 
-Интеграция с Telegram Bot API.
+Integration with the Telegram Bot API.
 
-**Функционал:**
-- Отправка уведомлений о сбоях
-- Отправка уведомлений о восстановлении
-- HTML форматирование сообщений
+**Features:**
 
-**Требования:**
-- `TELEGRAM_BOT_TOKEN` - токен бота
-- `TELEGRAM_CHAT_ID` - ID чата для уведомлений
+- Sending outage notifications
+- Sending recovery notifications
+- HTML formatting of messages
+
+**Requirements:**
+
+- `TELEGRAM_BOT_TOKEN` – bot token
+- `TELEGRAM_CHAT_ID` – chat ID for notifications
 
 #### 6. **Health Module** (`src/health/`)
 
-Модуль для health checks (NestJS Terminus).
+Module for health checks (NestJS Terminus).
 
 **Endpoints:**
-- `GET /health` - Проверка здоровья приложения
 
-### Middleware и Guards
+- `GET /health` - Checking the application’s health
 
-- **ThrottlerGuard** - Защита от DDoS (20 запросов/минуту)
-- **JwtAuthGuard** - Защита маршрутов, требующих аутентификации
-- **ValidationPipe** - Валидация входящих данных (DTO)
-- **AllExceptionsFilter** - Глобальная обработка ошибок
+### Middleware and Guards
 
-### API Документация
+- **ThrottlerGuard** - DDoS protection (20 requests per minute)
+- **JwtAuthGuard** – Protection for routes requiring authentication
+- **ValidationPipe** – Validation of incoming data (DTO)
+- **AllExceptionsFilter** – Global error handling
 
-Swagger UI доступен по адресу: `http://localhost:5000/api/docs`
+### API Documentation
 
-- Автоматическая генерация документации из декораторов
-- Интерактивное тестирование API
-- Авторизация через Bearer токены
+Swagger UI is available at: `http://localhost:5000/api/docs`
+
+- Automatic documentation generation from decorators
+- Interactive API testing
+- Authorisation via Bearer tokens
 
 ---
 
 ## 💻 Frontend
 
-### Архитектура Frontend (Feature-Sliced Design)
+### Frontend Architecture (Feature-Sliced Design)
 
-Проект использует методологию **FSD** для организации кода:
+The project uses the **FSD** methodology to organise the code:
 
 ```
 src/
-├── entities/        # Бизнес-сущности (Monitor, User)
-├── features/        # Фичи приложения (auth, create-monitor)
-├── widgets/         # Составные UI блоки
-└── shared/          # Переиспользуемый код
+├── entities/ # Business entities (Monitor, User)
+├── features/ # Application features (auth, create-monitor)
+├── widgets/ # Composite UI blocks
+└── shared/ # Reusable code
 ```
 
-### Основные страницы
+### Main Pages
 
 #### 1. **Dashboard** (`app/page.tsx`)
 
-Главная страница с обзором всех мониторов.
+The home page providing an overview of all monitors.
 
-**Компоненты:**
-- `StatsOverview` - Статистика (всего/online/offline)
-- `MonitorList` - Список карточек мониторов
-- Поиск и фильтры
-- Кнопка создания нового монитора
+**Components:**
 
-**Функционал:**
-- Автоматическая загрузка мониторов при входе
-- Поиск по названию/URL
-- Фильтрация по статусу
-- Обновление в реальном времени через WebSocket
+- `StatsOverview` – Statistics (total/online/offline)
+- `MonitorList` – List of monitor cards
+- Search and filters
+- Button to create a new monitor
+
+**Functionality:**
+
+- Monitors load automatically on login
+- Search by name/URL
+- Filter by status
+- Real-time updates via WebSocket
 
 #### 2. **Monitor Details** (`app/monitor/[id]/page.tsx`)
 
-Детальная страница монитора с аналитикой.
+Detailed monitor page with analytics.
 
-**Секции:**
-- Заголовок с названием и URL
-- Статистика: Доступность, Средний ответ, Инциденты
-- График времени отклика (Recharts)
-- Переключение периода (24h/7d/30d)
-- Таблица инцидентов (только DOWN события)
-- Кнопки экспорта (CSV, PDF)
+**Sections:**
 
-**Визуализация:**
-- Area Chart для истории задержек
-- Цветовая индикация статуса
-- Анимации при загрузке данных
+- Header with name and URL
+- Statistics: Availability, Average Response Time, Incidents
+- Response time chart (Recharts)
+- Period selection (24h/7d/30d)
+- Incident table (DOWN events only)
+- Export buttons (CSV, PDF)
+
+**Visualisation:**
+
+- Area chart for latency history
+- Colour-coded status indicators
+- Animations whilst data is loading
 
 #### 3. **Create Monitor** (`app/add/page.tsx`)
 
-Форма создания нового монитора.
+Form for creating a new monitor.
 
-**Поля:**
-- Название монитора
-- URL для проверки
-- Интервал проверки (в секундах)
+**Fields:**
 
-**Валидация:**
-- Zod схемы для валидации
-- React Hook Form для управления формой
+- Monitor name
+- URL to check
+- Check interval (in seconds)
+
+**Validation:**
+
+- Zod schema for validation
+- React Hook Form for form management
 
 #### 4. **Auth Pages** (`app/login/`, `app/register/`)
 
-Страницы аутентификации.
+Authentication pages.
 
-**Компоненты:**
-- `LoginForm` - Форма входа
-- `RegisterForm` - Форма регистрации
+**Components:**
 
-### UI Компоненты (Radix UI + Tailwind)
+- `LoginForm` – Login form
+- `RegisterForm` – Registration form
 
-**Компоненты из `shared/ui/`:**
-- `Button` - Кнопки различных вариантов
-- `Card` - Карточки для контента
-- `Input` - Поля ввода
-- `Dialog` - Модальные окна
-- `AlertDialog` - Диалоги подтверждения
-- `ThemeToggle` - Переключатель темы
+### UI Components (Radix UI + Tailwind)
 
-**Особенности UI:**
-- Полная поддержка темной темы
-- Плавные анимации (Framer Motion)
-- Адаптивный дизайн (mobile-first)
-- Доступность (ARIA атрибуты через Radix UI)
+**Components from `shared/ui/`:**
 
-### API Интеграция
+- `Button` – Various button styles
+- `Card` – Content cards
+- `Input` – Input fields
+- `Dialog` – Modal windows
+- `AlertDialog` – Confirmation dialogues
+- `ThemeToggle` – Theme toggle
+
+**UI Features:**
+
+- Full dark theme support
+- Smooth animations (Framer Motion)
+- Responsive design (mobile-first)
+- Accessibility (ARIA attributes via Radix UI)
+
+### API Integration
 
 #### API Client (`src/shared/api/base.ts`)
 
-Базовый axios клиент с:
-- Base URL из `NEXT_PUBLIC_API_URL`
-- Автоматическое добавление токенов в headers
-- Обработка ошибок
+A basic axios client with:
+
+- Base URL from `NEXT_PUBLIC_API_URL`
+- Automatic addition of tokens to headers
+- Error handling
 
 #### Refresh Token Handler (`src/shared/api/fetch-with-refresh.ts`)
 
-Автоматическое обновление токенов:
-- Перехват 401 ошибок
-- Вызов `/auth/refresh` с refresh токеном
-- Повтор запроса с новым токеном
-- Сохранение токенов в cookies
+Automatic token refresh:
+
+- Interception of 401 errors
+- Calling `/auth/refresh` with the refresh token
+- Retrying the request with the new token
+- Storing tokens in cookies
 
 ### State Management
 
-- **React Context** для глобального состояния (`AuthProvider`)
-- **Local State** через `useState` для компонентного состояния
-- **React Query** (не используется, но может быть добавлен)
+- **React Context** for global state (`AuthProvider`)
+- **Local State** via `useState` for component state
+- **React Query** (not currently in use, but may be added)
 
 ### WebSocket Integration
 
-Подключение к WebSocket серверу через `socket.io-client`:
-- Подписка на события `status_updated:{monitorId}`
-- Обновление UI без перезагрузки страницы
+Connecting to a WebSocket server via `socket.io-client`:
+
+- Subscribing to `status_updated:{monitorId}` events
+- Updating the UI without reloading the page
 
 ---
 
-## 🚀 DevOps & Инфраструктура
+## 🚀 DevOps & Infrastructure
 
 ### Docker Compose
 
-Все сервисы оркестрируются через `docker-compose.yml`:
+All services are orchestrated via `docker-compose.yml`:
 
 ```yaml
 services:
-  backend:      # NestJS API (порт 5000)
-  frontend:     # Next.js UI (порт 3000)
-  db:          # PostgreSQL (порт 5432)
-  redis:       # Redis (порт 6379)
+backend: # NestJS API (port 5000)
+frontend: # Next.js UI (port 3000)
+db: # PostgreSQL (port 5432)
+redis: # Redis (port 6379)
 ```
 
-**Особенности:**
-- Изолированная сеть `monitor-network`
-- Volume для персистентности данных БД
-- Health checks для frontend
-- Hot reload в development режиме
+**Features:**
+
+- Isolated `monitor-network`
+- Volume for database data persistence
+- Health checks for the frontend
+- Hot reload in development mode
 
 ### Dockerfiles
 
 #### Backend Dockerfile
+
 ```dockerfile
 FROM node:20-alpine
 WORKDIR /app
@@ -550,6 +589,7 @@ CMD ["node", "dist/main.js"]
 ```
 
 #### Frontend Dockerfile
+
 ```dockerfile
 FROM node:20-alpine
 WORKDIR /app
@@ -560,9 +600,10 @@ EXPOSE 3000
 CMD ["npm", "run", "dev"]
 ```
 
-### Переменные окружения
+### Environment variables
 
 #### Backend (.env)
+
 ```env
 DATABASE_URL=postgresql://user:password@db:5432/uptime_db
 REDIS_HOST=redis
@@ -575,6 +616,7 @@ TELEGRAM_CHAT_ID=your-chat-id
 ```
 
 #### Frontend (.env.local)
+
 ```env
 NEXT_PUBLIC_API_URL=http://localhost:5000
 API_URL=http://backend:5000
@@ -582,54 +624,59 @@ API_URL=http://backend:5000
 
 ### CI/CD Pipeline (GitHub Actions)
 
-Pipeline настроен в `.github/workflows/main.yml`:
+Pipeline is configured in `.github/workflows/main.yml`:
 
-**Триггеры:**
-- Push в ветки `main`, `dev`
-- Pull requests в `main`
+**Triggers:**
 
-**Этапы:**
-1. **Checkout code** - Получение кода
-2. **Setup pnpm** - Установка менеджера пакетов
-3. **Install dependencies** - Установка зависимостей (frontend + backend)
-4. **Run tests** - Запуск unit тестов (Vitest)
-5. **Build and E2E tests** - Сборка Docker образов и запуск Cypress тестов
+- Pushes to the `main` and `dev` branches
+- Pull requests to `main`
 
-**Особенности:**
-- Параллельное выполнение где возможно
-- Кеширование зависимостей
-- Автоматический запуск при каждом PR
+**Stages:**
+
+1. **Checkout code** – Retrieving the code
+2. **Setup pnpm** – Installing the package manager
+3. **Install dependencies** – Installing dependencies (frontend + backend)
+4. **Run tests** – Running unit tests (Vitest)
+5. **Build and E2E tests** – Building Docker images and running Cypress tests
+
+**Features:**
+
+- Parallel execution where possible
+- Caching of dependencies
+- Automatic execution on every PR
 
 ---
 
-## 🗄️ База данных
+## 🗄️ Database
 
-### Схема данных (Prisma)
+### Data schema (Prisma)
 
-#### Модель `User`
+#### `User` model
+
 ```prisma
 model User {
   id                        String    @id @default(uuid())
   email                     String    @unique
-  password                  String?   // null для OAuth пользователей
+  password                  String?   // null for OAuth users
   name                      String?
   image                     String?
   provider                  String    @default("credentials")
   externalId                String?
-  currentHashedRefreshToken String?   // для refresh токенов
+  currentHashedRefreshToken String?   // for refresh tokens
   createdAt                 DateTime? @default(now())
   updatedAt                 DateTime? @default(now())
-  Monitor                   Monitor[] // связь один-ко-многим
+  Monitor                   Monitor[] // one-to-many relationship
 }
 ```
 
-#### Модель `Monitor`
+#### `Monitor` model
+
 ```prisma
 model Monitor {
   id        String     @id @default(uuid())
   name      String
   url       String
-  interval  Int        @default(60)  // секунды
+  interval  Int        @default(60)  // sec
   status    Status     @default(PENDING)
   userId    String     // Foreign Key
   createdAt DateTime?  @default(now())
@@ -639,20 +686,22 @@ model Monitor {
 }
 ```
 
-#### Модель `CheckLog`
+#### `CheckLog` model
+
 ```prisma
 model CheckLog {
   id           String    @id @default(uuid())
   monitorId    String
-  statusCode   Int?      // HTTP код ответа
-  responseTime Int       // миллисекунды
+  statusCode   Int?      // HTTP response code
+  responseTime Int       // milliseconds
   status       Status    @default(PENDING)
   createdAt    DateTime? @default(now())
   monitor      Monitor   @relation(...)
 }
 ```
 
-#### Модель `Incident`
+#### `Incident` model
+
 ```prisma
 model Incident {
   id         String    @id @default(uuid())
@@ -664,82 +713,88 @@ model Incident {
 ```
 
 #### Enum `Status`
+
 ```prisma
 enum Status {
-  UP       // Сервис доступен
-  DOWN     // Сервис недоступен
-  PENDING  // Ожидание первой проверки
+  UP       // The service is available
+  DOWN     // The service is unavailable
+  PENDING  // Waiting for the first inspection
 }
 ```
 
-### Миграции
+### Migrations
 
-Prisma автоматически генерирует миграции из `schema.prisma`:
+Prisma automatically generates migrations from `schema.prisma`:
+
 ```bash
 npx prisma migrate dev --name migration_name
 ```
 
-Миграции хранятся в `apps/backend/prisma/migrations/`.
+Migrations are stored in `apps/backend/prisma/migrations/`.
 
-### Индексы
+### Indexes
 
-- `User.email` - уникальный индекс
-- `Monitor.userId` - внешний ключ с индексацией
-- `CheckLog.monitorId` - внешний ключ с индексацией
-- `CheckLog.createdAt` - для быстрых запросов по времени
+- `User.email` – unique index
+- `Monitor.userId` – foreign key with index
+- `CheckLog.monitorId` – foreign key with index
+- `CheckLog.createdAt` – for fast queries by time
 
 ---
 
-## 📦 Установка и запуск
+## 📦 Installation and setup
 
-### Предварительные требования
+### Prerequisites
 
 - **Node.js** 20+
-- **pnpm** (или npm/yarn)
+- **pnpm** (or npm/yarn)
 - **Docker** и **Docker Compose**
-- **PostgreSQL** 15+ (если запускаете локально)
-- **Redis** (если запускаете локально)
+- **PostgreSQL** 15+ (if you’re running it locally)
+- **Redis** (if you’re running it locally)
 
-### Быстрый старт с Docker Compose
+### Getting started quickly with Docker Compose
 
-1. **Клонируйте репозиторий:**
+1. **Clone the repository:**
+
 ```bash
 git clone <repository-url>
 cd uptime-sentinel
 ```
 
-2. **Настройте переменные окружения:**
+2. **Set the environment variables:**
 
-Создайте `.env` файлы:
+Create the `.env` files:
+
 - `apps/backend/.env`
 - `apps/frontend/.env.local`
 
-3. **Запустите все сервисы:**
+3. **Start all services:**
+
 ```bash
 docker-compose up --build
 ```
 
-4. **Откройте в браузере:**
+4. **Open in your browser:**
+
 - Frontend: http://localhost:3000
 - Backend API: http://localhost:5000
 - API Docs: http://localhost:5000/api/docs
 
-### Локальная разработка (без Docker)
+### Local development (without Docker)
 
 #### Backend
 
 ```bash
 cd apps/backend
 
-# Установка зависимостей
+# Installing dependencies
 pnpm install
 
-# Настройка БД
-cp .env.example .env  # Заполните переменные
+# Database configuration
+cp .env.example .env  # Fill in the variables
 npx prisma generate
 npx prisma migrate dev
 
-# Запуск
+# Launch
 pnpm run start:dev
 ```
 
@@ -748,40 +803,44 @@ pnpm run start:dev
 ```bash
 cd apps/frontend
 
-# Установка зависимостей
+# Installing dependencies
 pnpm install
 
-# Настройка
+# Configuration
 cp .env.example .env.local  # NEXT_PUBLIC_API_URL=http://localhost:5000
 
-# Запуск
+# Launch
 pnpm run dev
 ```
 
-### Инициализация базы данных
+### Initialising the database
 
 ```bash
 cd apps/backend
 
-# Создание миграций
+
+# Creating migrations
 npx prisma migrate dev
 
-# Заполнение тестовыми данными (опционально)
+
+# Seeding the database with test data (optional)
 npx prisma db seed
 ```
 
 ---
 
-## 📚 API Документация
+## 📚 API Documentation
 
-### Базовый URL
+### Base URL
+
 ```
 http://localhost:5000
 ```
 
-### Аутентификация
+### Authentication
 
-Большинство endpoints требуют JWT токен в заголовке:
+Most endpoints require a JWT token in the header:
+
 ```
 Authorization: Bearer <access_token>
 ```
@@ -791,46 +850,52 @@ Authorization: Bearer <access_token>
 #### Auth
 
 **POST `/auth/register`**
+
 ```json
 {
-  "email": "user@example.com",
-  "password": "password123",
-  "name": "John Doe"
+	"email": "user@example.com",
+	"password": "password123",
+	"name": "John Doe"
 }
 ```
+
 **Response:**
+
 ```json
 {
-  "accessToken": "eyJ...",
-  "refreshToken": "eyJ...",
-  "user": {
-    "id": "uuid",
-    "email": "user@example.com",
-    "name": "John Doe"
-  }
+	"accessToken": "eyJ...",
+	"refreshToken": "eyJ...",
+	"user": {
+		"id": "uuid",
+		"email": "user@example.com",
+		"name": "John Doe"
+	}
 }
 ```
 
 **POST `/auth/login`**
+
 ```json
 {
-  "email": "user@example.com",
-  "password": "password123"
+	"email": "user@example.com",
+	"password": "password123"
 }
 ```
 
 **POST `/auth/refresh`**
+
 ```json
 {
-  "refreshToken": "eyJ..."
+	"refreshToken": "eyJ..."
 }
 ```
 
 #### Monitors
 
-**GET `/monitors`** - Список мониторов текущего пользователя
+**GET `/monitors`** - List of monitors for the current user
 
 **Response:**
+
 ```json
 [
   {
@@ -844,36 +909,40 @@ Authorization: Bearer <access_token>
 ]
 ```
 
-**POST `/monitors`** - Создание монитора
+**POST `/monitors`** - Creating a monitor
+
 ```json
 {
-  "name": "My Website",
-  "url": "https://example.com",
-  "interval": 60
+	"name": "My Website",
+	"url": "https://example.com",
+	"interval": 60
 }
 ```
 
-**GET `/monitors/:id?period=24h`** - Детали монитора
+**GET `/monitors/:id?period=24h`** - Monitor specifications
+
 - Query params: `period` (24h | 7d | 30d)
 
-**DELETE `/monitors/:id`** - Удаление монитора
+**DELETE `/monitors/:id`** - Removing the monitor
 
-**GET `/monitors/:id/export-csv`** - Экспорт в CSV
+**GET `/monitors/:id/export-csv`** - Export in CSV
 
 #### Health
 
-**GET `/health`** - Проверка здоровья сервиса
+**GET `/health`** - Service health check
 
 ### WebSocket Events
 
-**Подключение:**
+**Connection**
+
 ```javascript
-import io from 'socket.io-client';
-const socket = io('http://localhost:5000');
+import io from 'socket.io-client'
+const socket = io('http://localhost:5000')
 ```
 
 **События:**
-- `status_updated:{monitorId}` - Обновление статуса монитора
+
+- `status_updated:{monitorId}` - Updating the monitor status
   ```json
   {
     "status": "UP" | "DOWN",
@@ -883,23 +952,27 @@ const socket = io('http://localhost:5000');
 
 ---
 
-## 🧪 Тестирование
+## 🧪 Testing
 
 ### Backend (Jest)
 
 ```bash
 cd apps/backend
 
-# Unit тесты
+
+# Unit tests
 pnpm run test
 
-# Тесты с покрытием
+
+# Coverage tests
 pnpm run test:cov
 
-# E2E тесты
+
+# E2E tests
 pnpm run test:e2e
 
-# Watch режим
+
+# Watch mode
 pnpm run test:watch
 ```
 
@@ -908,81 +981,80 @@ pnpm run test:watch
 ```bash
 cd apps/frontend
 
-# Unit тесты
+
+# Unit tests
 pnpm run test
 
-# UI для тестов
+
+# UI for tests
 pnpm run test:ui
 
-# E2E тесты (Cypress)
-pnpm run cy:open  # Интерактивный режим
-pnpm run cy:run   # Headless режим
+
+# E2E tests (Cypress)
+pnpm run cy:open # Interactive mode
+pnpm run cy:run # Headless mode
 ```
 
-### Покрытие кода
+### Code coverage
 
 Backend:
+
 ```bash
 pnpm run test:cov
 ```
 
 Frontend:
+
 ```bash
 pnpm run test -- --coverage
 ```
 
 ---
 
-## 🔧 Дополнительная информация
+## 🔧 Further information
 
-### Производительность
+### Performance
 
-- **BullMQ** обеспечивает эффективную обработку очередей
-- **Redis** кеширование для быстрого доступа
-- **Индексы БД** для оптимизации запросов
-- **WebSocket** для минимальной задержки обновлений
+- **BullMQ** ensures efficient queue processing
+- **Redis** caching for fast access
+- **Database indexes** to optimise queries
+- **WebSocket** for minimal update latency
 
-### Безопасность
+### Security
 
-- **JWT токены** с коротким сроком жизни
-- **Refresh токены** для безопасного обновления
-- **bcrypt** для хеширования паролей
-- **Throttler** для защиты от DDoS
-- **CORS** настройки для ограничения источников
-- **Валидация входных данных** через DTO
+- **JWT tokens** with a short lifespan
+- **Refresh tokens** for secure updates
+- **bcrypt** for password hashing
+- **Throttler** for DDoS protection
+- **CORS** settings to restrict sources
+- **Input data validation** via DTO
 
-### Масштабируемость
+### Scalability
 
-- Горизонтальное масштабирование воркеров BullMQ
-- Статистика работы через мониторинг очередей
-- Возможность добавления реплик БД
-- Load balancing для frontend
+- Horizontal scaling of BullMQ workers
+- Performance statistics via queue monitoring
+- Ability to add database replicas
+- Load balancing for the frontend
 
-### Мониторинг и логирование
+### Monitoring and logging
 
-- Логи в консоль (можно настроить Winston/Pino)
-- Health checks через `/health` endpoint
-- Метрики BullMQ через Redis
-- Ошибки обрабатываются глобальным фильтром
-
----
-
-## 📝 Лицензия
-
-Этот проект является приватным проектом.
+- Console logs (Winston/Pino can be configured)
+- Health checks via the `/health` endpoint
+- BullMQ metrics via Redis
+- Errors are handled by a global filter
 
 ---
 
-## 🤝 Вклад в проект
+## 🤝 Contributing to the project
 
-Проект находится в активной разработке. Предложения и PR приветствуются!
-
----
-
-## 📞 Контакты
-
-Для вопросов и предложений создавайте Issues в репозитории.
+The project is currently under active development. Suggestions and pull requests are welcome!
 
 ---
 
-**Uptime Sentinel** - Надежный мониторинг ваших сервисов 🛡️
+## 📞 Contact
+
+Please create Issues in the repository for any questions or suggestions.
+
+---
+
+**Uptime Sentinel** – Reliable monitoring of your services 🛡️
